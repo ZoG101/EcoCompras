@@ -5,6 +5,8 @@
 }
 
 body {
+    margin: 300px;
+    padding: 0px;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
@@ -14,7 +16,6 @@ body {
   }
 
 .navBar{
-
     width: 100%;
     background-color: #6bcb93;
     padding: 1rem;
@@ -27,18 +28,6 @@ body {
 
 main {
     flex: 1;
-  }
-  
-  footer {
-    width: 100%;
-    background-color: #6bcb93;
-    padding: 5px;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-text-stroke: 0.07px black;
-    margin: 2cm;
   }
 
 .logo-footer h1 {
@@ -224,6 +213,8 @@ main {
     padding: 0 20px;
 }
   .login-container {
+  flex: 1;
+  min-height: 65vh;
   text-align: center;
   margin: 2rem auto;
   max-width: 300px;
@@ -362,7 +353,9 @@ body {
     background-color: #d3af2e;
 }
 
-.footer {
+footer {
+    flex: 1;
+    flex-shrink: 0px;
     width: 100%;
     background-color: #6bcb93;
     padding: 5px;
@@ -370,8 +363,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    -webkit-text-stroke: 0.07px black;
+    margin: 0cm;
     margin-top: 20px;
-}
+  }
 
 .cadastro-container .endereco-section {
     margin-top: 20px;
