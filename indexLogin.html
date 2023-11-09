@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EcoCompras | Produtos sustentáveis</title>
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/login.css" />
+    <!-- Vou adicionar um arquivo CSS específico para estilos de login -->
+  </head>
+  <body>
+    <div class="navBar">
+      <div class="">
+        <h1 class="logo">Eco<span>Compras</span></h1>
+        <nav>
+          <ul>
+            <li><a href="indexHome.html">HOME</a></li>
+            <li>PRODUTOS</li>
+            <li><a href="indexLogin.html">MINHA CONTA</a></li>
+            <li>CARRINHO</li>
+          </ul>
+        </nav>
+        <div class="nav-icon-container"></div>
+      </div>
+    </div>
+    <div class="login-container">
+      <h2>Login</h2>
+      <p>Caso já tenha usuário, faça seu login.</p>
+      <form>
+        <label for="username">Usuário:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Seu e-mail"
+          required
+        />
+
+        <label for="password">Senha:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Sua senha"
+          required
+        />
+        <button type="submit">Acessar</button>
+        <a href="indexCadastro.html" class="button-scroll"
+          >É novo? Cadastre-se</a
+        >
+      </form>
+    </div>
+    <footer class="green-background" id="footer">
+      <div class="page-inner-content footer-content">
+        <div class="logo-footer">
+          <h1 class="logo">Eco<span>Compras</span></h1>
+          <p>100% de produtos sustentáveis!</p>
+          <p>copyright 2023 ©</p>
+        </div>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".button-scroll").click(function () {
+          $("html, body").animate(
+            {
+              scrollTop: $("#footer").offset().top,
+            },
+            1000
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
