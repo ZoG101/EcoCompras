@@ -33,7 +33,6 @@ main {
 .logo-footer h1 {
     margin: 0;
 }
-
 .navBar>div{
     display: flex;
     align-items: center;
@@ -257,13 +256,17 @@ button:hover {
     background-color: #d3af2e;
 }
 .login-container {
-    background-color: #f0f0f0; /* Cor de fundo cinza claro */
-    padding: 20px;
-    border-radius: 5px; /* Borda arredondada */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    width: 600px; /* Largura do contêiner (aumente esse valor para torná-lo mais largo) */
-    margin: 0 auto; /* Centraliza o contêiner horizontalmente */
-    text-align: center; /* Centraliza o conteúdo dentro do contêiner */
+    margin-bottom: 60px; /* Ajuste conforme necessário para dar espaço ao footer */
+}
+.login-container {
+    background-color: #f0f0f0;
+    padding: 20px; /* Adicione algum preenchimento interno para manter o conteúdo dentro da caixa */
+    border-radius: 5px;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Reduzi a largura para 300px, ajuste conforme necessário */
+    height: 300px; /* Adicionei a altura fixa para tornar a caixa um quadrado */
+    margin: 0 auto;
+    text-align: center;
 }
 
 .login-container form {
@@ -367,6 +370,8 @@ footer {
     margin: 0cm;
     margin-top: 20px;
   }
+
+  
 
 .cadastro-container .endereco-section {
     margin-top: 20px;
