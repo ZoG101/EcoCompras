@@ -36,17 +36,17 @@
     </div>
     <div class="conta-container">
         <h2>Dados pessoais</h2>
-        <p><label>Nome:</label></p>
-        <p><label>CPF:</label></p>
-        <p><label>E-mail:</label><p></p>
-        <p><label>Telefone:</label></p>
+        <p><label>Nome:</label> <?php echo $cliente['nome']; ?></p>
+        <p><label>CPF:</label> <?php echo $cliente['cpf']; ?></p>
+        <p><label>E-mail:</label> <?php echo $cliente['email']; ?></p>
+        <p><label>Telefone:</label> <?php echo $cliente['telefone']; ?></p>
         
         <h2>Endereço de entrega</h2>
-        <p><label>CEP:</label></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <p><label>CEP:</label> <?php echo $endereco['cep']; ?></p>
+        <p><?php echo $endereco['cidade']; ?> - <?php echo $endereco['estado']; ?></p>
+        <p><?php echo $endereco['rua']; ?> Nº<?php echo $endereco['numero']; ?></p>
+        <p><?php echo $endereco['bairro']; ?></p>
+        <p><?php echo $endereco['complemento']; ?></p>
 
         <h2>Pedidos</h2>
         <table>
@@ -65,7 +65,7 @@
             </tbody>
         </table>
     </div>
-    <footer class="green-background" style="position: fixed; bottom: 0; width: 100%; padding: 10px;">      
+    <footer class="green-background" style=" width: 100%; padding: 10px;">      
     <div class="page-inner-content footer-content">
           <div class="logo-footer">
               <h1 class="logo">Eco<span>Compras</span></h1>

@@ -128,8 +128,21 @@
 
           if (!$fail) {
 
-            $_SESSION['cliente'] = $cliente;
-            $_SESSION['endereco'] = $endereco;
+            $_SESSION['cliente'] = [
+              'nome'=> $cliente->getNome(),
+              'cpf'=> $cliente->getCpf(),
+              'email'=> $cliente->getEmail(),
+              'telefone'=> $cliente->getTelefone()
+            ];
+            $_SESSION['endereco'] = [
+              'cep'=> $endereco->getCep(),
+              'cidade'=> $endereco->getCidade(),
+              'estado'=> $endereco->getEstado(),
+              'rua'=> $endereco->getRua(),
+              'numero'=> $endereco->getNumero(),
+              'bairro'=> $endereco->getBairro(),
+              'complemento'=> $endereco->getComplemento()
+            ];
 
           }
 

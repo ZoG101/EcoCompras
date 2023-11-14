@@ -1,5 +1,12 @@
 <?php session_start(); ?>
 <?php
+  if (isset($_SESSION['cliente'])) {
+
+    echo "<script>window.location.replace('indexConta.php');</script>";
+
+  }
+?>
+<?php
   require_once 'classes\models\Cliente.php';
   require_once 'classes\models\Endereco.php';
   require_once 'classes\crud\ClienteDAO.php';
