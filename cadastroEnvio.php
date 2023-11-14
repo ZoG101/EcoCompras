@@ -49,7 +49,7 @@
             <div class="nav-icon-container"></div>
           </div>
         </div>
-        <div class="cadastro-container">
+        <div class="cadastro-envio-container">
         <?php
           $clienteTest = false;
           $enderecoTest = false;
