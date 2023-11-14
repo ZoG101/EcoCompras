@@ -15,20 +15,20 @@
         <nav>
           <ul>
             <li>
-              <a href="indexHome.html" onclick="markClicked(this)">HOME</a>
+              <a href="index.php" onclick="markClicked(this)">HOME</a>
             </li>
             <li>
-              <a href="indexProdutos.html" onclick="markClicked(this)"
+              <a href="indexProdutos.php" onclick="markClicked(this)"
                 >PRODUTOS</a
               >
             </li>
             <li>
-              <a href="indexLogin.html" onclick="markClicked(this)"
+              <a href="indexLogin.php" onclick="markClicked(this)"
                 >MINHA CONTA</a
               >
             </li>
             <li>
-              <a href="indexCarrinho.html" onclick="markClicked(this)"
+              <a href="indexCarrinho.php" onclick="markClicked(this)"
                 >CARRINHO</a
               >
             </li>

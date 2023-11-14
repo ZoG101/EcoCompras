@@ -14,10 +14,10 @@
             <h1 class="logo">Eco<span>Compras</span></h1>
             <nav>
                 <ul>
-                    <li><a href="indexHome.html" onclick="markClicked(this)">HOME</a></li>
-                    <li><a href="indexProdutos.html" onclick="markClicked(this)">PRODUTOS</a></li>
-                    <li><a href="indexLogin.html" onclick="markClicked(this)">MINHA CONTA</a></li>
-                    <li><a href="indexCarrinho.html" onclick="markClicked(this)">CARRINHO</a></li>
+                    <li><a href="index.php" onclick="markClicked(this)">HOME</a></li>
+                    <li><a href="indexProdutos.php" onclick="markClicked(this)">PRODUTOS</a></li>
+                    <li><a href="indexLogin.php" onclick="markClicked(this)">MINHA CONTA</a></li>
+                    <li><a href="indexCarrinho.php" onclick="markClicked(this)">CARRINHO</a></li>
                 </ul>
             </nav>
             <div class="nav-icon-container"></div>
