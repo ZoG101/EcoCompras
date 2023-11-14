@@ -1,4 +1,4 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -6,68 +6,54 @@
 
 body {
     margin: 300px;
-    padding: 0px;
+    padding: 0;
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     font-family: 'arial';
-  }
+}
 
-.navBar{
+.navBar {
     width: 100%;
-    background-color: #6bcb93;
     padding: 1rem;
     position: sticky;
     top: 0;
-    box-shadow: 10px 0px 10px #6bcb93;
+    box-shadow: 10px 0 10px #6bcb93;
     z-index: 99;
     margin-bottom: 80px;
+    background-color: #6bcb93;
+    color: white;
+    text-align: center;
 }
 
-main {
-    flex: 1;
-  }
-
-.logo-footer h1 {
-    margin: 0;
-}
-.navBar>div{
+.navBar>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.logo{
-    font-size: 250%;
+.logo {
+    
+    font-size: 2rem;
     color: #ffc600;
     margin-left: 6.25cm;
 }
 
-.logo span{
-    color: white
+.logo span {
+    color: white;
 }
 
-nav ul{
+nav ul {
     margin-right: 5cm;
     display: flex;
     list-style: none;
     align-items: center;
 }
 
-.nav-icon-container{
-    display: flex;
-    align-items: center;
-}
-
-.nav-icon-container{
-    display: flex;
-    align-items: center;
-}
-
-nav ul li{
-    color: black;
+nav ul li {
+    color: rgb(255, 255, 255);
     font-weight: bold;
     text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.4);
     margin-left: 4.5rem;
@@ -75,10 +61,9 @@ nav ul li{
     cursor: pointer;
 }
 
-nav ul li:hover{
+nav ul li:hover {
     transform: translate(-5px);
     transition: all 0.2s;
-    font-weight: bold;
 }
 
 header {
@@ -142,6 +127,7 @@ header {
 }
 
 main {
+    flex: 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -170,28 +156,29 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-  }
-  
+}
+
 .comentario {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     background-color: #79a7ec;
     padding: 10px;
     border: 1px solid #79a7ec;
     border-radius: 5px;
     text-align: center;
-    max-width: calc(33.33% - 20px); 
+    max-width: calc(33.33% - 20px);
     margin-bottom: 2cm;
 }
 
 .avaliacao {
-    text-align: center; 
-    margin-top: 10px; 
+    text-align: center;
+    margin-top: 10px;
 }
 
 .comentario p {
     margin: 5px 0;
 }
+
 .comentario p :first-child {
     font-weight: bold;
     font-size: 5rem;
@@ -211,83 +198,88 @@ main {
     margin: auto;
     padding: 0 20px;
 }
-  .login-container {
-  flex: 1;
-  min-height: 65vh;
-  text-align: center;
-  margin: 2rem auto;
-  max-width: 300px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+.login-container {
+    flex: 1;
+    min-height: 65vh;
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .login-container h2 {
-  color: #6bcb93;
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+    color: #6bcb93;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
 }
 
 form label {
-  display: block;
-  text-align: left;
-  margin-top: 10px;
+    display: block;
+    text-align: left;
+    margin-top: 10px;
 }
 
 form input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
+
 button {
     background-color: #ffc600;
     color: #0a0a0a;
     border: none;
     border-radius: 5px;
-    padding: 15px 25px 15px; 
+    padding: 15px 25px 15px;
     cursor: pointer;
-    font-size: 15px; 
+    font-size: 15px;
 }
 
 button:hover {
     background-color: #d3af2e;
 }
+
 .login-container {
-    margin-bottom: 60px; /* Ajuste conforme necessário para dar espaço ao footer */
+    margin-bottom: 60px;
 }
+
 .login-container {
     background-color: #f0f0f0;
-    padding: 20px; /* Adicione algum preenchimento interno para manter o conteúdo dentro da caixa */
+    padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Reduzi a largura para 300px, ajuste conforme necessário */
-    height: 300px; /* Adicionei a altura fixa para tornar a caixa um quadrado */
+    width: 300px;
+    height: 300px;
     margin: 0 auto;
     text-align: center;
 }
 
 .login-container form {
-    width: 100%; /* Preenche a largura total do contêiner */
+    width: 100%;
 }
 
 .login-container form input[type="text"],
 .login-container form input[type="password"] {
-    width: 100%; /* Preenche a largura total do contêiner */
+    width: 100%;
     padding: 10px;
     margin: 29px 0;
     border: none;
     border-radius: 18px;
-    font-size: 18px; /* Tamanho da fonte */
+    font-size: 18px;
 }
 
-.login-container p{
+.login-container p {
     color: rgb(14, 14, 14);
     font-size: 0.3cm;
     margin-right: 1.4cm;
 }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -295,19 +287,8 @@ body {
     background-color: #f4f4f4;
 }
 
-.navBar {
-    background-color: #6bcb93;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-}
-
-.navBar h1 {
-    font-size: 2rem;
-}
-
 .cadastro-container {
-    background-color: #f0f0f0; /* Fundo cinza claro */
+    background-color: #f0f0f0;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -342,7 +323,7 @@ body {
 }
 
 .cadastro-container button {
-    background-color: #ffc600;;
+    background-color: #ffc600;
     color: #0a0a0a;
     border: none;
     border-radius: 5px;
@@ -356,9 +337,21 @@ body {
     background-color: #d3af2e;
 }
 
+footer .logo-footer {
+    text-align: center;
+  }
+  
+  .logo-footer h1 {
+    margin: 0;
+  }
+  
+  .logo-footer p {
+    margin:0.1%;
+  }
+
 footer {
     flex: 1;
-    flex-shrink: 0px;
+    flex-shrink: 0;
     width: 100%;
     background-color: #6bcb93;
     padding: 5px;
@@ -367,14 +360,149 @@ footer {
     justify-content: center;
     align-items: center;
     -webkit-text-stroke: 0.07px black;
-    margin: 0cm;
-    margin-top: 20px;
-  }
-
-  
+    margin: 0;
+    margin-top: 10px;
+}
 
 .cadastro-container .endereco-section {
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #ccc; /* Linha divisória entre as seções */
+    border-top: 1px solid #ccc;
+}
+
+.navBar a {
+    color: black !important;
+}
+
+.navBar a.clicked {
+    color: black;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #6bcb93;
+    color: white;
+}
+
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+        max-width: 1200px;
+        gap: 50px;
+    margin: auto;
+  }
+  
+  .product {
+    text-align: center;
+    width: calc(25% - 20px); 
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+  .product:nth-child(4n) {
+    margin-right: 0; 
+  }
+  
+  .catalog .top-row .product {
+    width: calc(33.33% - 20px);
+  }
+  
+  .catalog .top-row .product:nth-child(3n) {
+    margin-right: 0; /* Remove a margem à direita do último produto em cada linha */
+  }
+  
+  /* Botão Adicionar ao Carrinho */
+  .product button {
+    background-color: #6bcb93;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    
+  }
+  
+  .product button:hover {
+    background-color: #4c8f66;
+  }
+  
+  .product img {
+    width: 200px;
+    height: auto; /* Para manter a proporção original */
+    display: block;
+    margin: 0 auto; /* Centralizar a imagem no contêiner */
+  }
+
+.product img,
+.product h3,
+.product p,
+.product button {
+  margin-bottom: 2mm; /* Espaçamento de 2mm entre os elementos dentro da .product */
+}
+
+.tamanho-box {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2mm; 
+    gap: 10px; /* Espaçamento entre os tamanhos */
+  }
+  
+  .tamanho-box span {
+    cursor: pointer;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 3px;
+  }
+  
+  .nota-fiscal {
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Centraliza o texto */
+}
+
+h3, h4 {
+    color: #333;
+    text-align: left; /* Centraliza o texto */
+}
+
+p {
+    margin: 10px 0;
+    line-height: 1.5; 
+}
+
+.small-text {
+    font-size: 14px;
+    color: #777; 
+}
+
+.nota-fiscal h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+.nota-fiscal h4 {
+    font-size: 18px;
+    margin-top: 15px;
+    color: #555;
+}
+#totalValor {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e44d26; /* Cor mais intensa para destacar o total */
 }
