@@ -56,14 +56,13 @@
          * @param string $email
          * @param string $telefone
          */
-        public function __construct (string $nome, string $cpf, string $email, string $telefone, string $senha, Endereco $endereco) {
+        public function __construct (string $nome, string $cpf, string $email, string $telefone, string $senha, ?Endereco $endereco) {
 
             $this->nome = $nome;
             $this->cpf = $cpf;
             $this->email = $email;
             $this->telefone = $telefone;
             $this->senha = $senha;
-            $this->senha = $this->hashPassword($senha);
             $this->endereco = $endereco;
 
         }
@@ -126,6 +125,12 @@
         public function getEndereco(): Endereco {
 
             return $this->endereco;
+
+        }
+
+        public function setEndereco(Endereco $endereco): void {
+
+            $this->endereco = $endereco;
 
         }
 

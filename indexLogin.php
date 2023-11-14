@@ -1,3 +1,27 @@
+<?php
+  session_start();
+
+  require_once 'classes\models\Cliente.php';
+  require_once 'classes\models\Endereco.php';
+  require_once 'classes\crud\ClienteDAO.php';
+  require_once 'classes\crud\EnderecoDAO.php';
+
+  use crud\ClienteDAO;
+  use crud\EnderecoDAO;
+  use models\Cliente;
+  use models\Endereco;
+
+  $fail = false;
+  $CDAO = new ClienteDAO();
+  $EDAO = new EnderecoDAO();
+?>
+<?php
+  if (isset($_SESSION['cliente'])) {
+
+    echo "<script>window.location.replace('indexConta.php');</script>";
+
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -33,7 +57,7 @@
     <div class="login-container">
       <h2>Login</h2>
       <p>Caso já tenha usuário, faça seu login.</p>
-      <form>
+      <form method="POST" action="">
         <label for="username">Usuário:</label>
         <input
           type="text"
@@ -56,6 +80,61 @@
           >É novo? Cadastre-se</a
         >
       </form>
+      <?php
+        if ((isset($_POST['username'])) && isset($_POST['password'])) {
+
+          if (!$CDAO->verificaSeExisteCliente($_POST['username'])) {
+
+            echo "<p class='fail'>Usuário ou senha estão incorretos</p>";
+            $fail = true;
+
+          }
+
+          try {
+
+            $cliente = $CDAO->buscaCliente($_POST['username'],);
+
+          } catch (\Throwable $th) {
+            
+            $fail = true;
+
+          }
+
+          if (!$fail) {
+
+            if ($_POST['password'] != $cliente->getSenha()) {
+
+              $fail = true;
+              echo "<p class='fail'>Usuário ou senha estão incorretos</p>";
+
+            }
+
+          }
+
+          if (!$fail) {
+
+            try {
+
+              $endereco = $EDAO->buscaEndereco($cliente);
+              $cliente->setEndereco($endereco);
+
+            } catch (\Throwable $th) {
+
+              $fail = true;
+
+            }
+
+          }
+
+          if (!$fail) {
+
+            $_SESSION['cliente'] = $cliente;
+            $_SESSION['endereco'] = $endereco;
+
+          }
+
+        }
+      ?>
     </div>
     <footer class="green-background" style="position: fixed; bottom: 0; width: 100%; padding: 10px;">      <div class="page-inner-content footer-content">
           <div class="logo-footer">

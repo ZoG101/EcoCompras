@@ -276,8 +276,12 @@ button:hover {
 
 .login-container p {
     color: rgb(14, 14, 14);
-    font-size: 0.3cm;
-    margin-right: 1.4cm;
+    font-size: 0.5cm;
+}
+
+.fail {
+    font-size: 0.2cm;
+    color: red;
 }
 
 body {
@@ -300,6 +304,13 @@ body {
 .cadastro-container h2 {
     font-size: 1.5rem;
     margin-top: 20px;
+}
+
+.cadastro-container img {
+
+    width: 75px;
+    height: 75px;
+
 }
 
 .cadastro-container form {
@@ -338,17 +349,47 @@ body {
     background-color: #d3af2e;
 }
 
+.conta-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+table {
+    border: none;
+    width: 450px;
+    text-align: center;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: rgb(75, 238, 78);
+}
+
+tbody {
+    margin-top: 10px;
+}
+
+tr, td, th {
+    border: none;
+}
+
 footer .logo-footer {
     text-align: center;
-  }
-  
-  .logo-footer h1 {
+}
+
+.logo-footer h1 {
     margin: 0;
-  }
-  
-  .logo-footer p {
+}
+
+.logo-footer p {
     margin:0.1%;
-  }
+}
 
 footer {
     flex: 1;
@@ -363,6 +404,8 @@ footer {
     -webkit-text-stroke: 0.07px black;
     margin: 0;
     margin-top: 10px;
+    position: relative;
+    bottom: 0;
 }
 
 .cadastro-container .endereco-section {

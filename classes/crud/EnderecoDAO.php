@@ -45,10 +45,15 @@
          */
         private function getCon(): PDO {
 
-            return EnderecoDAO::$con;
+            return $this->con;
 
         }
 
+        /**
+         * Método que busca um endereço no banco de dados
+         * @param \models\Cliente $cliente
+         * @return \models\Endereco
+         */
         public function buscaEndereco(Cliente $cliente): endereco {
 
             if (!$this->verificaSeExisteEndereco($cliente->getEmail())) return throw new InvalidArgumentException("Endereco não existe!");
@@ -60,7 +65,10 @@
 
             try {
 
-                return $stmt->fetchObject("Endereco");
+                $stmt->execute();
+                $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
+                $endereco = new Endereco($fetch["cep"], $fetch["cidade"], $fetch["estado"], $fetch["rua"], $fetch["numero"], $fetch["bairro"], $fetch["complemento"]);
+                return $endereco;
 
             } catch (\Throwable $th) {
 
@@ -71,6 +79,12 @@
 
         }
 
+        /**
+         * Método que cadastra um endereço no banco de dados
+         * @param \models\Cliente $cliente
+         * @param \models\Endereco $endereco
+         * @return bool
+         */
         public function cadastraEndereco(Cliente $cliente, Endereco $endereco): bool {
 
             if ($this->verificaSeExisteEndereco($cliente->getEmail())) return throw new InvalidArgumentException("Endereco já existe!");
@@ -116,7 +130,13 @@
 
         }
 
-        private function verificaSeExisteEndereco(string $email): bool {
+        /**
+         * Método que verifica se um endereço já existe na base de dados
+         * Retorna `true` caso exista e `false` caso não exista
+         * @param string $email
+         * @return bool
+         */
+        public function verificaSeExisteEndereco(string $email): bool {
 
             $sql = "SELECT COUNT(*) FROM cliente JOIN endereco ON endereco.cliente_email = :email;";
             $stmt = $this->getCon()->prepare($sql);

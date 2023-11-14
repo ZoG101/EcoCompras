@@ -8,6 +8,7 @@
     use models\Cliente;
     use domain\ConnectionFactory;
 
+    use models\Endereco;
     use PDO;
 
     use InvalidArgumentException;
@@ -43,7 +44,7 @@
          */
         private function getCon(): PDO {
 
-            return ClienteDAO::$con;
+            return $this->con;
 
         }
 
@@ -54,18 +55,22 @@
          * @throws \InvalidArgumentException
          * @return Cliente
          */
-        public function buscaCliente(Cliente $cliente): Cliente {
+        public function buscaCliente(string $email): Cliente {
 
-            $email = $cliente->getEmail();
             if (!$this->verificaSeExisteCliente($email)) return throw new InvalidArgumentException("Cliente não existe!");
 
             $sql = "SELECT * FROM cliente WHERE email = :email;";
             $stmt = $this->getCon()->prepare($sql);
             $stmt->bindParam(":email", $email);
+            $fetch = null;
 
             try {
                 
-                return $stmt->fetchObject("Cliente");
+                $stmt->execute();
+                $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
+                $endereco = new Endereco("N/D", "N/D", "N/D", "N/D", "N/D", "N/D", "N/D");
+                $cliente = new Cliente($fetch["nome"], $fetch["cpf"], $fetch["email"], $fetch["telefone"], $fetch["senha"], $endereco);
+                return $cliente;
 
             } catch (\Throwable $th) {
                 
@@ -128,7 +133,7 @@
          * @param string $email
          * @return bool
          */
-        private function verificaSeExisteCliente(string $email): bool {
+        public function verificaSeExisteCliente(string $email): bool {
 
             $sql = "SELECT * FROM cliente WHERE email = :email;";
             $stmt = $this->getCon()->prepare($sql);

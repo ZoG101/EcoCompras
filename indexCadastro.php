@@ -1,3 +1,11 @@
+<?php session_start(); ?>
+<?php
+  if (isset($_SESSION['cliente'])) {
+
+    echo "<script>window.location.replace('indexConta.php');</script>";
+
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,7 +40,7 @@
         </div>
     <div class="cadastro-container">
         <h2>Cadastro de Dados Pessoais</h2>
-        <form>
+        <form method="POST" action="cadastroEnvio.php">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
             

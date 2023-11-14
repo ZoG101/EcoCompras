@@ -17,7 +17,7 @@
 
             try {
 
-                return new PDO('mysql:host=localhost:3307;dbname=Eco_Compras;charset=utf8', 'root', 'root');
+                return new PDO('mysql:host=localhost:3307;dbname=Eco_Compras;charset=utf8', 'root', 'root12345D');
 
             } catch (\Throwable $th) {
 
