@@ -543,11 +543,17 @@ footer {
     gap: 10px; /* Espaçamento entre os tamanhos */
   }
   
-  .tamanho-box span {
+  .tamanho-box label {
     cursor: pointer;
     border: 1px solid #ddd;
     padding: 5px;
     border-radius: 3px;
+  }
+
+  .selected {
+    background-color: #6bcb93;
+    color: rgb(255, 0, 0);
+    border: 3px solid #ddd;
   }
   
   .nota-fiscal {

@@ -13,6 +13,11 @@
      */
     class ConnectionFactory {
 
+        /**
+         * Função que retorna uma nova conxão através de um `PDO`
+         * @return PDO
+         * @throws PDOException
+         */
         public static function getConexao(): PDO {
 
             try {

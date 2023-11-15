@@ -1,4 +1,21 @@
 <?php session_start(); ?>
+<?php
+    require_once 'classes\helper\Contador.php';
+
+    use helper\Contador;
+
+    if (!isset($_SESSION['prodCont'])) {
+
+        $prodCont = new Contador();
+        $_SESSION['prodCont'] = $prodCont->getCont();
+
+    } else {
+
+        $prodCont = new Contador();
+        $prodCont->setCont($_SESSION['prodCont']);
+
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -8,6 +25,16 @@
     <link rel="stylesheet" href="/styles/global.css" />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="produtos.js"></script>
+    <script>
+        function marcaSelecionado(id){
+            $(document).ready(function() {
+                $("#"+id).addClass("selected");
+                $("#"+id).siblings().removeClass("selected");
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="navBar">
@@ -29,47 +56,65 @@
         <!-- Seus produtos aqui -->
         <div class="product" id="produto1">
             <img src="imagens-pti/camisetaCinza.png" alt="Camisetas Básica" />
-            <h3>Camiseta Unisex</h3>
+            <h3>Camiseta Unisex Cinza</h3>
             <p>Cor: Cinza</p>
-            <p><strong>Tamanhos:</strong>
-                <div class="tamanho-box">
-                    <span id="tamanhos1" onclick="selecionarTamanhos('tamanhos1')">P</span>
-                    <span id="tamanhos2" onclick="selecionarTamanhos('tamanhos2')">M</span>
-                    <span id="tamanhos3" onclick="selecionarTamanhos('tamanhos3')">G</span>
-                </div>
-            </p>
-            <p class="price">R$ 50.00</p>
-            <button class="addToCartBtn" onclick="adicionarAoCarrinho('produto1')">Adicionar ao Carrinho</button>
+            <form method="POST" action="">
+                <p><strong>Tamanhos:</strong>
+                    <div class="tamanho-box">
+                        <input type="radio" id="Camiseta-Unisex-Cinza-P" name="produto" value="Camiseta Unisex Cinza - P" checked hidden>
+                        <label class="selected" id="produtoLabel1P" for="Camiseta-Unisex-Cinza-P" onclick="marcaSelecionado('produtoLabel1P')">P</label>
+                        <input type="radio" id="Camiseta-Unisex-Cinza-M" name="produto" value="Camiseta Unisex Cinza - M" hidden>
+                        <label id="produtoLabel1M" for="Camiseta-Unisex-Cinza-M" onclick="marcaSelecionado('produtoLabel1M')">M</label>
+                        <input type="radio" id="Camiseta-Unisex-Cinza-G" name="produto" value="Camiseta Unisex Cinza - G" hidden>
+                        <label id="produtoLabel1G" for="Camiseta-Unisex-Cinza-G" onclick="marcaSelecionado('produtoLabel1G')">G</label>
+                    </div>
+                </p>
+                <p class="price">R$ 50.00</p>
+                <input type="hidden" name="preco" value="50">
+                <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
+            </form>
         </div>
 
         <div class="product" id="produto2">
             <img src="imagens-pti/CamisetaPreta.png" alt="Camisetas Básica" />
-            <h3>Camiseta Unisex </h3>
+            <h3>Camiseta Unisex Preta</h3>
             <p>Cor: Preta</p>
-            <p><strong>Tamanhos:</strong>
-                <div class="tamanho-box">
-                    <span id="tamanhos4" onclick="selecionarTamanhos('tamanhos4')">P</span>
-                    <span id="tamanhos5" onclick="selecionarTamanhos('tamanhos5')">M</span>
-                    <span id="tamanhos6" onclick="selecionarTamanhos('tamanhos6')">G</span>
-                </div>
-            </p>
-            <p class="price">R$ 50.00</p>
-            <button class="addToCartBtn" onclick="adicionarAoCarrinho('produto2')">Adicionar ao Carrinho</button>
+                <form method="POST" action="">
+                <p><strong>Tamanhos:</strong>
+                    <div class="tamanho-box">
+                        <input type="radio" id="Camiseta-Unisex-Preto-P" name="produto" value="Camiseta Unisex Preto - P" checked hidden>
+                        <label class="selected" id="produtoLabel2P" for="Camiseta-Unisex-Preto-P" onclick="marcaSelecionado('produtoLabel2P')">P</label>
+                        <input type="radio" id="Camiseta-Unisex-Preto-M" name="produto" value="Camiseta Unisex Preto - M" hidden>
+                        <label id="produtoLabel2M" for="Camiseta-Unisex-Preto-M" onclick="marcaSelecionado('produtoLabel2M')">M</label>
+                        <input type="radio" id="Camiseta-Unisex-Preto-G" name="produto" value="Camiseta Unisex Preto - G" hidden>
+                        <label id="produtoLabel2G" for="Camiseta-Unisex-Preto-G" onclick="marcaSelecionado('produtoLabel2G')">G</label>
+                    </div>
+                </p>
+                <p class="price">R$ 50.00</p>
+                <input type="hidden" name="preco" value="50">
+                <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
+            </form>
         </div>
 
         <div class="product" id="produto3">
             <img src="imagens-pti/CamistaBranca.png" alt="Camisetas Básica" />
-            <h3>Camiseta Unisex </h3>
+            <h3>Camiseta Unisex Branca</h3>
             <p>Cor: Branca</p>
-            <p><strong>Tamanhos:</strong>
-                <div class="tamanho-box">
-                    <span id="tamanhos7" onclick="selecionarTamanhos('tamanhos7')">P</span>
-                    <span id="tamanhos8" onclick="selecionarTamanhos('tamanhos8')">M</span>
-                    <span id="tamanhos9" onclick="selecionarTamanhos('tamanhos9')">G</span>
-                </div>
-            </p>
-            <p class="price">R$ 50.00</p>
-            <button class="addToCartBtn" onclick="adicionarAoCarrinho('produto3')">Adicionar ao Carrinho</button>
+            <form method="POST" action="">
+                <p><strong>Tamanhos:</strong>
+                    <div class="tamanho-box">
+                        <input type="radio" id="Camiseta-Unisex-Branca-P" name="produto" value="Camiseta Unisex Branca - P" checked hidden>
+                        <label class="selected" id="produtoLabel3P" for="Camiseta-Unisex-Branca-P" onclick="marcaSelecionado('produtoLabel3P')">P</label>
+                        <input type="radio" id="Camiseta-Unisex-Branca-M" name="produto" value="Camiseta Unisex Branca - M" hidden>
+                        <label id="produtoLabel3M" for="Camiseta-Unisex-Branca-M" onclick="marcaSelecionado('produtoLabel3M')">M</label>
+                        <input type="radio" id="Camiseta-Unisex-Branca-G" name="produto" value="Camiseta Unisex Branca - G" hidden>
+                        <label id="produtoLabel3G" for="Camiseta-Unisex-Branca-G" onclick="marcaSelecionado('produtoLabel3G')">G</label>
+                    </div>
+                </p>
+                <p class="price">R$ 50.00</p>
+                <input type="hidden" name="preco" value="50">
+                <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
+            </form>
         </div>
 
         <div class="product" id="produto4">
@@ -77,7 +122,11 @@
             <h3>Sacola Sustentável</h3>
             <p>Sacola sustentável feita de material 100% reciclável</p>
             <p class="price">R$ 30.00</p>
-            <button class="addToCartBtn" onclick="adicionarAoCarrinho('produto4')">Adicionar ao Carrinho</button>
+            <form method="POST" action="">
+                <input type="hidden" name="produto" value="Sacola Sustentável">
+                <input type="hidden" name="preco" value="30">
+                <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
+            </form>
         </div>
 
         <div class="product" id="produto5">
@@ -85,7 +134,11 @@
             <h3>Escova de Dente Sustentável</h3>
             <p>Escova de Dente material feito de bambu 100% reciclável</p>
             <p class="price">R$ 35.00</p>
-            <button class="addToCartBtn" onclick="adicionarAoCarrinho('produto5')">Adicionar ao Carrinho</button>
+            <form method="POST" action="">
+                <input type="hidden" name="produto" value="Escova de Dente Sustentável">
+                <input type="hidden" name="preco" value="35">
+                <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
+            </form>
         </div>
 
         <div class="product" id="produto6">
@@ -93,9 +146,85 @@
             <h3>Mochila Reciclável</h3>
             <p>Mochila produzida com material 100% reciclável. Remenda-se carregar até 8kg</p>
             <p class="price">R$ 250.00</p>
-            <button class="addToCartBtn" onclick="adicionarAoCarrinho('produto6')">Adicionar ao Carrinho</button>
+            <form method="POST" action="">
+                <input type="hidden" name="produto" value="Mochila Reciclável">
+                <input type="hidden" name="preco" value="250">
+                <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
+            </form>
         </div>
     </div>
+    <?php
+        if (isset($_POST['produto'])) {
+            $jaExiste = false;
+
+            for ($i = 0; $i < $prodCont->getCont(); $i++) {
+                
+                if ($_SESSION['produtos'][$i]['nome'] == $_POST['produto']) {
+
+                    $jaExiste = true;
+
+                }
+
+                echo $_SESSION['produtos'][$i]['nome'] . " " . $_SESSION['produtos'][$i]['preco'] . " " . $_SESSION['produtos'][$i]['quantidade'];
+
+            }
+
+            if (!$jaExiste) {
+
+                $_SESSION['produtos'][$prodCont->getCont()] = [
+                    'nome' => $_POST['produto'],
+                    'preco' => $_POST['preco'],
+                    'quantidade' => 1
+                ];
+
+                $prodCont->adicionar();
+                $_SESSION['prodCont'] = $prodCont->getCont();
+                echo "sdicionou!" . $_POST['produto'];
+
+                echo "<script>
+                Swal.fire({
+                title: 'Produto adicionado ao carrinho!',
+                text: 'Deseja ir para o carrinho?',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redireciona para a página de carrinho após adicionar o produto
+                    window.location.href = 'indexCarrinho.php';
+                } else {
+                    // Continua na página atual
+                    console.log('Continuar na página atual');
+                }
+                });
+                </script>";
+
+            } else {
+
+                echo "<script>
+                Swal.fire({
+                title: 'Produto já adicionado ao carrinho!',
+                text: 'Deseja ir para o carrinho?',
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonText: 'Sim',
+                cancelButtonText: 'Não'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redireciona para a página de carrinho após adicionar o produto
+                    window.location.href = 'indexCarrinho.php';
+                } else {
+                    // Continua na página atual
+                    console.log('Continuar na página atual');
+                }
+                });
+                </script>";
+
+            }
+
+        }
+    ?>
     <footer class="footer; position: fixed;">
         <div class="page-inner-content footer-content">
             <div class="logo-footer">
