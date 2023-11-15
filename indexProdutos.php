@@ -154,9 +154,11 @@
         </div>
     </div>
     <?php
+        //recebe requisição POST
         if (isset($_POST['produto'])) {
             $jaExiste = false;
 
+            //verifica se o produto já está presente no carriho da sessão
             for ($i = 0; $i < $prodCont->getCont(); $i++) {
                 
                 if ($_SESSION['produtos'][$i]['nome'] == $_POST['produto']) {
@@ -165,10 +167,9 @@
 
                 }
 
-                echo $_SESSION['produtos'][$i]['nome'] . " " . $_SESSION['produtos'][$i]['preco'] . " " . $_SESSION['produtos'][$i]['quantidade'];
-
             }
 
+            //se não existir, adiciona ao carrinho e exibe a mensagem de confirmação. se já existir, exibe o erro
             if (!$jaExiste) {
 
                 $_SESSION['produtos'][$prodCont->getCont()] = [
@@ -179,7 +180,6 @@
 
                 $prodCont->adicionar();
                 $_SESSION['prodCont'] = $prodCont->getCont();
-                echo "sdicionou!" . $_POST['produto'];
 
                 echo "<script>
                 Swal.fire({
@@ -195,7 +195,7 @@
                     window.location.href = 'indexCarrinho.php';
                 } else {
                     // Continua na página atual
-                    console.log('Continuar na página atual');
+                    window.location.href = 'indexProdutos.php';
                 }
                 });
                 </script>";
@@ -216,7 +216,7 @@
                     window.location.href = 'indexCarrinho.php';
                 } else {
                     // Continua na página atual
-                    console.log('Continuar na página atual');
+                    window.location.href = 'indexProdutos.php';
                 }
                 });
                 </script>";
