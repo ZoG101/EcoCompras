@@ -1,12 +1,10 @@
 <?php session_start(); ?>
 <?php
-    require_once 'classes\models\Cliente.php';
-    require_once 'classes\models\Endereco.php';
-    require_once 'classes\crud\ClienteDAO.php';
-    require_once 'classes\crud\EnderecoDAO.php';
+    require_once 'classes\models\Pedido.php';
+    require_once 'classes\crud\PedidoDAO.php';
 
-    use models\Cliente;
-    use models\Endereco;
+    use models\Pedido;
+    use crud\PedidoDAO;
 
     $cliente = $_SESSION['cliente'];
     $endereco = $_SESSION['endereco'];
@@ -47,23 +45,69 @@
         <p><?php echo $endereco['rua']; ?> Nº<?php echo $endereco['numero']; ?></p>
         <p><?php echo $endereco['bairro']; ?></p>
         <p><?php echo $endereco['complemento']; ?></p>
+        <?php
+            $PDAO = new PedidoDAO();
 
-        <h2>Pedidos</h2>
-        <table>
-            <thead>
-                <th><h2>Pedido n</h2></th>
-                <th><h2>x</h2></th>
-                <th><h2>x</h2></th>
-                <th><h2>x</h2></th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Itens</td>
-                    <td>Quantidade</td>
-                    <td>Valor unitário</td>
-                </tr>
-            </tbody>
-        </table>
+            if ($PDAO->verificaSeExistePedio($cliente['email'])) {
+
+                try {
+
+                    $pedidos = $PDAO->buscaPedido($cliente['email']);
+
+                } catch (\Throwable $th) {
+
+                    print($th->getMessage());
+
+                }
+
+                echo"<h2>Pedidos</h2>";
+
+                foreach ($pedidos as $value) {
+
+                    echo "<table>
+                    <thead class='"; 
+                        if ($value->getEstado() == 0){
+                            echo "PENDENTE";
+                        } else {
+                            echo "APROVADO";
+                        }
+                    echo "'>
+                        <th colspan='2'><h3>".$value->getNumero()."</h3></th>
+                        <th><h3>R$".$value->getValorTotal()."</h3></th>
+                        <th><h3>".$value->getData()->format('d/m/Y H:i')."</h3></th>
+                        <th><h3>";
+                        if ($value->getEstado() == 0){
+                            echo "PENDENTE";
+                        } else {
+                            echo "APROVADO";
+                        }
+                        echo "</h3></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th colspan='2' class='th-corpo'>Itens</th>
+                            <th colspan='2' class='th-corpo'>Quantidade</th>
+                            <th colspan='2' class='th-corpo'>Valor unitário</th>
+                        </tr>";
+
+                        foreach ($value->getItensPedido() as $value2) {
+                            
+                            echo 
+                            "<tr>
+                                <td colspan='2'>".$value2->getNome()."</td>
+                                <td colspan='2'>".$value2->getQtn()."</td>
+                                <td colspan='2'>".$value2->getValorUnitario()."</td>
+                            </tr>";
+
+                        }
+                        
+                    echo "</tbody>
+                </table>";
+                    
+                }
+                
+            }
+        ?>
     </div>
     <footer class="green-background" style=" width: 100%; padding: 10px;">      
     <div class="page-inner-content footer-content">

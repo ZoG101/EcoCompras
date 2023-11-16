@@ -54,7 +54,7 @@
          * @param \models\Cliente $cliente
          * @return \models\Endereco
          */
-        public function buscaEndereco(Cliente $cliente): endereco {
+        public function buscaEndereco(Cliente $cliente): Endereco {
 
             if (!$this->verificaSeExisteEndereco($cliente->getEmail())) return throw new InvalidArgumentException("Endereco não existe!");
 

@@ -20,9 +20,9 @@
 
         /**
          * Representa o número do pedido
-         * @var int
+         * @var string
          */
-        private int $numero;
+        private string $numero;
         /**
          * Representa o valor total do pedido
          * @var float
@@ -53,21 +53,20 @@
          * @param string $estado
          * @param array $itensPedido
          */
-        public function __construct(int $numero, float $valorTotal, DateTime $date, string $estado, array $itensPedido) {
+        public function __construct(string $numero, float $valorTotal, DateTime $data, string $estado) {
 
             $this->numero = $numero;
             $this->valorTotal = $valorTotal;
-            $this->date = $date;
+            $this->data = $data;
             $this->estado = $estado;
-            $this->itensPedido = $itensPedido;
 
         }
 
         /**
          * Retorna o número do pedido
-         * @return int
+         * @return string
          */
-        public function getNumero(): int {
+        public function getNumero(): string {
 
             return $this->numero;
 
@@ -87,7 +86,7 @@
          * Retorn a data do pedido
          * @return DateTime
          */
-        public function getDate(): DateTime {
+        public function getData(): DateTime {
 
             return $this->data;
 

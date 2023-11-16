@@ -144,6 +144,8 @@
               'complemento'=> $endereco->getComplemento()
             ];
 
+            echo "<script>window.location.replace('indexConta.php');</script>";
+
           }
 
         }
