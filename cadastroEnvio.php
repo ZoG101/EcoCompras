@@ -57,7 +57,45 @@
 
           try {
 
+            if (strlen($_POST['complemento']) == 0){
+
+              $_POST['complemento'] = 'N/D';
+
+            }
+
             $endereco = new Endereco($_POST['cep'], $_POST['cidade'], $_POST['estado'], $_POST['logradouro'], $_POST['numero'], $_POST['bairro'], $_POST['complemento']);
+
+            if (strlen($_POST['cpf']) > 11) {
+
+              $_POST['cpf'] = str_replace('-', '', $_POST['cpf']);
+              $_POST['cpf'] = str_replace('.', '', $_POST['cpf']);
+      
+            }
+
+            try {
+
+              $_POST['telefone'] = str_replace('-', '', $_POST['telefone']);
+              $_POST['telefone'] = str_replace('(', '', $_POST['telefone']);
+              $_POST['telefone'] = str_replace(')', '', $_POST['telefone']);
+              $_POST['telefone'] = str_replace(' ', '', $_POST['telefone']);
+              $_POST['telefone'] = '0'.$_POST['telefone'];
+
+            } catch (\Throwable $th) {
+              
+              print $th->getMessage();
+
+            }
+
+            try {
+              
+              $_POST['nome'] = strtoupper($_POST['nome']);
+              
+            } catch (\Throwable $th) {
+              
+              print $th->getMessage();
+              
+            }
+
             $cliente = new Cliente($_POST['nome'], $_POST['cpf'], $_POST['email'], $_POST['telefone'], $_POST['senha'], $endereco);
             $CDAO = new ClienteDAO();
             $EDAO = new EnderecoDAO();

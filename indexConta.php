@@ -35,16 +35,26 @@
     <div class="conta-container">
         <h2>Dados pessoais</h2>
         <p><label>Nome:</label> <?php echo $cliente['nome']; ?></p>
-        <p><label>CPF:</label> <?php echo $cliente['cpf']; ?></p>
+        <p><label>CPF:</label> <?php echo substr($cliente['cpf'], 0, 3).'.'.substr($cliente['cpf'], 3, 3).'.'.substr($cliente['cpf'], 6, 3).'-'.substr($cliente['cpf'], 9, 2);; ?></p>
         <p><label>E-mail:</label> <?php echo $cliente['email']; ?></p>
-        <p><label>Telefone:</label> <?php echo $cliente['telefone']; ?></p>
+        <p><label>Telefone:</label> <?php 
+            if (strlen($cliente['telefone']) == 11){
+
+               echo '('.substr($cliente['telefone'], 1, 2).')'.' '.substr($cliente['telefone'], 3, 4).'-'.substr($cliente['telefone'], 7);
+
+            } else {
+
+                echo '('.substr($cliente['telefone'], 1, 2).')'.' '.substr($cliente['telefone'], 3, 5).'-'.substr($cliente['telefone'], 8);
+
+            } ?>
+        </p>
         
         <h2>Endereço de entrega</h2>
-        <p><label>CEP:</label> <?php echo $endereco['cep']; ?></p>
+        <p><label>CEP:</label> <?php echo substr($endereco['cep'], 0, 5).'-'.substr($endereco['cep'], 5, 3); ?></p>
         <p><?php echo $endereco['cidade']; ?> - <?php echo $endereco['estado']; ?></p>
         <p><?php echo $endereco['rua']; ?> Nº<?php echo $endereco['numero']; ?></p>
         <p><?php echo $endereco['bairro']; ?></p>
-        <p><?php echo $endereco['complemento']; ?></p>
+        <?php if ($endereco['complemento'] != 'N/D') echo '<p>'.$endereco['complemento'].'</p>'; ?>
         <?php
             $PDAO = new PedidoDAO();
 
@@ -105,6 +115,8 @@
                 </table>";
                     
                 }
+
+                $PDAO->valida($cliente['email']);
                 
             }
         ?>

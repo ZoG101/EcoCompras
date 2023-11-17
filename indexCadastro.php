@@ -14,6 +14,8 @@
     <title>Cadastro de Dados Pessoais</title>
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/cadastro.css">
+    <link rel="stylesheet" href="styles/_variaveis.css">
+    <link rel="stylesheet" href="styles/inputs.css">
     <style>
         .navBar a {
           color: black !important;
@@ -40,43 +42,52 @@
         </div>
     <div class="cadastro-container">
         <h2>Cadastro de Dados Pessoais</h2>
-        <form method="POST" action="cadastroEnvio.php">
+        <form method="POST" action="cadastroEnvio.php" onsubmit="validaPassword();">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
-            
-            <label for="cpf">CPF:</label>
-            <input type="text" id="cpf" name="cpf" placeholder="Seu CPF" required>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Seu email" required>
-            
-            <label for="telefone">Telefone:</label>
-            <input type="tel" id="telefone" name="telefone" placeholder="Seu telefone" required>
-            
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" placeholder="Sua senha" required>
-            
-            <label for="confirm-senha">Confirmação de Senha:</label>
-            <input type="password" id="confirm-senha" name="confirm-senha" placeholder="Confirme sua senha" required>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" data-tipo="nome" required>
+            <span class="input-mensagem-erro-nome erro"></span>
 
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" placeholder="Seu CPF" data-tipo="cpf" required>
+            <span class="input-mensagem-erro-cpf erro"></span>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Seu email" data-tipo="email" required>
+            <span class="input-mensagem-erro-email erro"></span>
+
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" name="telefone" placeholder="Seu telefone" data-tipo="telefone" pattern="^(?=.*[0-9])(?!.*[a-z])(?!.*[A-Z])(?!.*[!@#$%^&*_=+.]).{11,15}$" required>
+            <span class="input-mensagem-erro-telefone erro"></span>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Sua senha" data-tipo="senha" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*[ ])(?=\S+$).{6,}$" title="A senha deve conter, pelo menos, 6 caracteres, deve conter no mínimo uma letra maiúscula e uma minúscula, um número e não deve conter espaços." required>
+            <span class="input-mensagem-erro-senha erro"></span>
+
+            <label for="confirm-senha">Confirmação de Senha:</label>
+            <input type="password" id="confirm-senha" name="confirm-senha" placeholder="Confirme sua senha" data-tipo="senhaConf" required>
+            <span class="input-mensagem-erro-senhaConf erro"></span>
         
             <h2>Cadastro do Endereço</h2>
 
             <label for="cep">CEP:</label>
-            <input type="text" id="cep" name="cep" placeholder="CEP" required>
-            
+            <input type="text" id="cep" name="cep" placeholder="CEP" pattern="[\d]{5}-?[\d]{3}" data-tipo="cep" required>
+            <span class="input-mensagem-erro-cep erro"></span>
+
             <label for="estado">Estado:</label>
-            <input type="text" id="estado" name="estado" placeholder="Estado" required>
-            
+            <input type="text" id="estado" name="estado" placeholder="Estado" data-tipo="estado" required>
+            <span class="input-mensagem-erro-estado erro"></span>
+
             <label for="cidade">Cidade:</label>
-            <input type="text" id="cidade" name="cidade" placeholder="Cidade" required>
-            
+            <input type="text" id="cidade" name="cidade" placeholder="Cidade" data-tipo="cidade" required>
+            <span class="input-mensagem-erro-cidade erro"></span>
+
             <label for="bairro">Bairro:</label>
             <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
             
             <label for="logradouro">Logradouro:</label>
-            <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" required>
-            
+            <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" data-tipo="logradouro" required>
+            <span class="input-mensagem-erro-logradouro erro"></span>
+
             <label for="numero">Nº:</label>
             <input type="text" id="numero" name="numero" placeholder="Número" required>
             
@@ -95,5 +106,6 @@
             </div>
         </div>
     </footer>
+    <script src="public/js/app.js" type="module"></script>
 </body>
 </html>

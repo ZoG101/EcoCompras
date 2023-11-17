@@ -165,6 +165,35 @@
 
         }
 
+        public function valida(string $email): bool {
+
+            $CDAO = new ClienteDAO();
+
+            if (!$CDAO->verificaSeExisteCliente($email)) return throw new InvalidArgumentException("Cliente não existe!");
+            if (!$this->verificaSeExistePedio($email)) return throw new PDOException("Não há pedidos!");
+
+            $this->con->beginTransaction();
+
+            $sql = "UPDATE pedido SET estado = 1 WHERE cliente_email = :email";
+            $stmt = $this->getCon()->prepare($sql);
+            $stmt->bindParam(":email", $email);
+
+            try {
+
+                $stmt->execute();
+                $this->con->commit();
+                return true;
+
+            } catch (\Throwable $th) {
+
+                $this->con->rollBack();
+                print($th->getMessage());
+                exit;
+
+            }
+
+        }
+
         public function verificaSeExistePedio(string $email): bool {
 
             $sql = "SELECT COUNT(*) FROM PEDIDO WHERE PEDIDO.cliente_email = :email;";

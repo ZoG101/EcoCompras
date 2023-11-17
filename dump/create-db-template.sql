@@ -54,9 +54,9 @@ CREATE TABLE `ITEM_PEDIDO` (
 INSERT INTO cliente VALUES('ecompras', '11111111111', 'eco@gmail.com', 'eco2023', '11111111111');
 INSERT INTO endereco (cep, cidade, estado, rua, numero, bairro, complemento, cliente_email) VALUES('00000000', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'eco@gmail.com');
 
-INSERT INTO pedido (valor_total, data, estado, cliente_email) VALUES(100.0, '2021-08-04 14:00:00', 1, 'teste6@gmail.com');
+INSERT INTO pedido (valor_total, data, estado, cliente_email) VALUES(100.0, '2021-08-04 14:00:00', 0, 'teste9@gmail.com');
 
-INSERT INTO item_pedido (nome_produto, quantidade, valor_unitario, pedido_id) VALUES('mochila', 1, 100, 0000000004);
+INSERT INTO item_pedido (nome_produto, quantidade, valor_unitario, pedido_id) VALUES('mochila', 1, 100, 0000000007);
 
 SELECT endereco.cep, endereco.cidade, endereco.estado, endereco.rua, endereco.numero, endereco.bairro, endereco.complemento FROM cliente JOIN endereco ON endereco.cliente_email = "teste3@gmail.com";
 
@@ -74,4 +74,4 @@ SELECT * FROM PEDIDO WHERE PEDIDO.cliente_email = :email;
 
 SELECT PEDIDO.id, ITEM_PEDIDO.nome_produto, ITEM_PEDIDO.quantidade, ITEM_PEDIDO.valor_unitario FROM PEDIDO JOIN ITEM_PEDIDO ON PEDIDO.id = ITEM_PEDIDO.pedido_id AND PEDIDO.cliente_email = :email;
 
-UPDATE pedido SET estado = 1 WHERE id = 0000000002;
+UPDATE pedido SET estado = 1;

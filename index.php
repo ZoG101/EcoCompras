@@ -39,7 +39,7 @@
               Descubra produtos sustentáveis, de qualidade excepcional e entrega
               rápida.
             </p>
-            <buttonInicio onclick="window.location.href='indexProdutos.html'">Explore agora!</buttonInicio>          </div>
+            <buttonInicio onclick="window.location.href='indexProdutos.php'">Explore agora!</buttonInicio>          </div>
           <div class="header-bottom-side-right">
             <img src="/imagens-pti/arvoreSust.jpg" />
           </div>
