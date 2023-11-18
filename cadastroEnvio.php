@@ -63,6 +63,12 @@
 
             }
 
+            if (strlen($_POST['cep']) > 8) {
+
+              $_POST['cep'] = str_replace('-', '', $_POST['cep']);
+
+            }
+
             $endereco = new Endereco($_POST['cep'], $_POST['cidade'], $_POST['estado'], $_POST['logradouro'], $_POST['numero'], $_POST['bairro'], $_POST['complemento']);
 
             if (strlen($_POST['cpf']) > 11) {

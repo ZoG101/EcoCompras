@@ -82,15 +82,17 @@
             <span class="input-mensagem-erro-cidade erro"></span>
 
             <label for="bairro">Bairro:</label>
-            <input type="text" id="bairro" name="bairro" placeholder="Bairro" required>
+            <input type="text" id="bairro" name="bairro" placeholder="Bairro" data-tipo="bairro" required>
+            <span class="input-mensagem-erro-bairro erro"></span>
             
             <label for="logradouro">Logradouro:</label>
             <input type="text" id="logradouro" name="logradouro" placeholder="Logradouro" data-tipo="logradouro" required>
             <span class="input-mensagem-erro-logradouro erro"></span>
 
             <label for="numero">Nº:</label>
-            <input type="text" id="numero" name="numero" placeholder="Número" required>
-            
+            <input type="text" id="numero" name="numero" placeholder="Número" data-tipo="numero" required>
+            <span class="input-mensagem-erro-numero erro"></span>
+
             <label for="complemento">Complemento:</label>
             <input type="text" id="complemento" name="complemento" placeholder="Complemento (opcional)">
             

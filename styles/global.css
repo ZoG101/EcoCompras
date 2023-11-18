@@ -19,6 +19,10 @@ body {
     color:#e21818;
 }
 
+.list-erro {
+    list-style: none;
+}
+
 .navBar {
     width: 100%;
     padding: 1rem;

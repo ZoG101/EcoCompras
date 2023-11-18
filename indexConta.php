@@ -35,7 +35,7 @@
     <div class="conta-container">
         <h2>Dados pessoais</h2>
         <p><label>Nome:</label> <?php echo $cliente['nome']; ?></p>
-        <p><label>CPF:</label> <?php echo substr($cliente['cpf'], 0, 3).'.'.substr($cliente['cpf'], 3, 3).'.'.substr($cliente['cpf'], 6, 3).'-'.substr($cliente['cpf'], 9, 2);; ?></p>
+        <p><label>CPF:</label> <?php echo substr($cliente['cpf'], 0, 3).'.'.substr($cliente['cpf'], 3, 3).'.'.substr($cliente['cpf'], 6, 3).'-'.substr($cliente['cpf'], 9, 2); ?></p>
         <p><label>E-mail:</label> <?php echo $cliente['email']; ?></p>
         <p><label>Telefone:</label> <?php 
             if (strlen($cliente['telefone']) == 11){

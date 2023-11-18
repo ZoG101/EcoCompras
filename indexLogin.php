@@ -85,7 +85,7 @@
 
           if (!$CDAO->verificaSeExisteCliente($_POST['username'])) {
 
-            echo "<p class='fail'>Usuário ou senha estão incorretos</p>";
+            echo "<p class='fail erro'>Usuário ou senha estão incorretos</p>";
             $fail = true;
 
           }

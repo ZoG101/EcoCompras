@@ -54,9 +54,9 @@ CREATE TABLE `ITEM_PEDIDO` (
 INSERT INTO cliente VALUES('ecompras', '11111111111', 'eco@gmail.com', 'eco2023', '11111111111');
 INSERT INTO endereco (cep, cidade, estado, rua, numero, bairro, complemento, cliente_email) VALUES('00000000', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'eco@gmail.com');
 
-INSERT INTO pedido (valor_total, data, estado, cliente_email) VALUES(100.0, '2021-08-04 14:00:00', 0, 'teste9@gmail.com');
+INSERT INTO pedido (valor_total, data, estado, cliente_email) VALUES(100.0, '2021-08-04 14:00:00', 0, 'teste12@gmail.com');
 
-INSERT INTO item_pedido (nome_produto, quantidade, valor_unitario, pedido_id) VALUES('mochila', 1, 100, 0000000007);
+INSERT INTO item_pedido (nome_produto, quantidade, valor_unitario, pedido_id) VALUES('mochila', 1, 100, 0000000008);
 
 SELECT endereco.cep, endereco.cidade, endereco.estado, endereco.rua, endereco.numero, endereco.bairro, endereco.complemento FROM cliente JOIN endereco ON endereco.cliente_email = "teste3@gmail.com";
 

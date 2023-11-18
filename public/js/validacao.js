@@ -22,10 +22,12 @@ function validaPassword(){
 
     if(password.value !== confirm_password.value) {
         confirm_password.setCustomValidity('As senhas devem ser iguais')
-        input.parentElement.querySelector('.input-mensagem-erro-senhaConf').innerHTML = 'As senhas devem ser iguais'
+        confirm_password.parentElement.classList.add('input-container--invalido')
+        confirm_password.parentElement.querySelector('.input-mensagem-erro-senhaConf').innerHTML = 'As senhas devem ser iguais'
     } else {
         confirm_password.setCustomValidity('')
-        input.parentElement.querySelector('.input-mensagem-erro-senhaConf').innerHTML = ''
+        confirm_password.parentElement.classList.remove('input-container--invalido')
+        confirm_password.parentElement.querySelector('.input-mensagem-erro-senhaConf').innerHTML = ''
     }
 }
 
@@ -46,11 +48,12 @@ const mensagensDeErro = {
         typeMismatch: 'O email digitado não é válido.'
     },
     telefone:{
-        patternMismatch: 'O telefone deve conter estar em um dos seguintes formatos.<br> <ul><li>(99) 99999-9999</li><li>099999999999</li></ul>'
+        valueMissing: 'O campo de telefone não pode estar vazio.',
+        patternMismatch: 'O telefone deve estar em um dos seguintes formatos:<br><ul class="list-erro"><li>(99) 99999-9999</li><li>099999999999</li></ul>'
     },
     senha: {
         valueMissing: 'O campo de senha não pode estar vazio.',
-        patternMismatch: '<ul><li>Mínimo de 6 caracteres</li><li>Uma letra maiúscula</li><li>Uma letra minúscula</li><li>Não deve conter espaços</li></ul>'
+        patternMismatch: '<ul class="list-erro"><li>Mínimo de 6 caracteres</li><li>Uma letra maiúscula</li><li>Uma letra minúscula</li><li>Não deve conter espaços</li></ul>'
     },
     cpf: {
         valueMissing: 'O campo de CPF não pode estar vazio.',
@@ -66,6 +69,12 @@ const mensagensDeErro = {
     },
     cidade: {
         valueMissing: 'O campo de cidade não pode estar vazio.'
+    },
+    bairro: {
+        valueMissing: 'O campo de bairro não pode estar vazio.'
+    },
+    numero: {
+        valueMissing: 'O campo de número não pode estar vazio.'
     },
     estado: {
         valueMissing: 'O campo de estado não pode estar vazio.'
