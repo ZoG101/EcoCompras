@@ -1,14 +1,14 @@
 <?php session_start(); ?>
 <?php
-  require_once 'classes\models\Cliente.php';
-  require_once 'classes\models\Endereco.php';
-  require_once 'classes\crud\ClienteDAO.php';
-  require_once 'classes\crud\EnderecoDAO.php';
+  if (!isset($_SESSION['cliente'])) {
 
-  use crud\ClienteDAO;
-  use crud\EnderecoDAO;
-  use models\Cliente;
-  use models\Endereco;
+    echo "<script>window.location.replace('indexLogin.php');</script>";
+
+  } else if (!isset($_SESSION['produtos'])) {
+
+    echo "<script>window.location.replace('indexProdutos.php');</script>";
+
+  }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
