@@ -125,33 +125,31 @@
          * @param \models\Pedido $endereco
          * @return bool
          */
-        public function cadastraPedido(Cliente $cliente, Pedido $pedido): bool {
-
-            //implementação real pendente...
+        public function cadastraPedido(string $email, Pedido $pedido): bool {
 
             $CDAO = new ClienteDAO();
 
-            if (!$CDAO->verificaSeExisteCliente($cliente->getEmail())) return throw new InvalidArgumentException("Cliente não existe!");
+            if (!$CDAO->verificaSeExisteCliente($email)) return throw new InvalidArgumentException("Cliente não existe!");
 
-            $sql = "INSERT INTO endereco (cliente_email, cep, cidade, estado, rua, numero, bairro, complemento) VALUES (:email, :cep, :cidade, :estado, :rua, :numero, :bairro, :complemento);";
+            $sql = "INSERT INTO pedido (valor_total, data, estado, cliente_email) VALUES (:valor_total, :data, :estado, :cliente_email);";
             $this->con->beginTransaction();
             $stmt = $this->getCon()->prepare($sql);
 
-            $stmt->bindParam(":email", $email);
-            $stmt->bindParam(":cep", $cep);
-            $stmt->bindParam(":cidade", $cidade);
+            $valorTotal = $pedido->getValorTotal();
+            $data = $pedido->getData()->format('Y-m-d H:i:i');
+            $estado = $pedido->getEstado();
+            $cliente_email = $email;
+
+            $stmt->bindParam(":valor_total", $valorTotal);
+            $stmt->bindParam(":data", $data);
             $stmt->bindParam(":estado", $estado);
-            $stmt->bindParam(":rua", $rua);
-            $stmt->bindParam(":numero", $numero);
-            $stmt->bindParam(":bairro", $bairro);
-            $stmt->bindParam(":complemento", $complemento);
+            $stmt->bindParam(":cliente_email", $cliente_email);
 
             $result = false;
 
             try {
 
-                $result = $stmt->execute();
-                $this->con->commit();
+                $stmt->execute();
 
             } catch (\Throwable $th) {
                 
@@ -159,6 +157,57 @@
                 print($th->getMessage());
                 exit;
                 
+            }
+
+            $sql = "SELECT id FROM pedido WHERE cliente_email = :email ORDER BY id DESC LIMIT 1;";
+            $stmt = $this->getCon()->prepare($sql);
+            
+            $stmt->bindParam(":email", $cliente_email);
+
+            try {
+
+                $stmt->execute();
+                $res = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            } catch (\Throwable $th) {
+                
+                $this->con->rollBack();
+                print($th->getMessage());
+                exit;
+                
+            }
+
+            $sql = "INSERT INTO item_pedido (nome_produto, quantidade, valor_unitario, pedido_id) VALUES (:nome_produto, :quantidade, :valor_unitario, :pedido_id);";
+            $stmt = $this->getCon()->prepare($sql);
+
+            $id = $res['id'];
+
+            try {
+
+                foreach ($pedido->getItensPedido() as $value) {
+                            
+                    $nome = $value->getNome();
+                    $qtn = $value->getQtn();
+                    $valor = $value->getValorUnitario();
+
+                    $stmt->bindParam(":nome_produto", $nome);
+                    $stmt->bindParam(":quantidade", $qtn);
+                    $stmt->bindParam(":valor_unitario", $valor);
+                    $stmt->bindParam(":pedido_id", $id);
+
+                    $stmt->execute();
+
+                }
+
+                $this->con->commit();
+                $result = true;
+
+            } catch (\Throwable $th) {
+
+                $this->con->rollBack();
+                print($th->getMessage());
+                exit;
+
             }
 
             return $result;

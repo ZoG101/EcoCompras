@@ -144,7 +144,15 @@
               'complemento'=> $endereco->getComplemento()
             ];
 
-            echo "<script>window.location.replace('indexConta.php');</script>";
+            if (isset($_SESSION['produtos'])) {
+
+              echo "<script>window.location.replace('indexCarrinho.php');</script>";
+
+            } else {
+
+              echo "<script>window.location.replace('indexConta.php');</script>";
+
+            }
 
           }
 

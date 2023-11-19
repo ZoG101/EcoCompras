@@ -62,6 +62,8 @@ SELECT endereco.cep, endereco.cidade, endereco.estado, endereco.rua, endereco.nu
 
 SELECT COUNT(*) FROM cliente JOIN endereco ON endereco.cliente_email = :email;
 
+select * from item_pedido;
+
 select * from cliente;
 
 select * from endereco;
@@ -69,6 +71,8 @@ select * from endereco;
 SELECT * FROM cliente WHERE email = :email;
 
 SELECT * FROM pedido;
+
+SELECT id FROM pedido WHERE cliente_email = :email ORDER BY id DESC LIMIT 1;
 
 SELECT * FROM PEDIDO WHERE PEDIDO.cliente_email = :email;
 

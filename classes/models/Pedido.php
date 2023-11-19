@@ -113,6 +113,17 @@
         }
 
         /**
+         * Define o valor total do pedido
+         * @param float $valorTotal
+         * @return void
+         */
+        public function setValorTotal(float $valorTotal): void {
+
+            $this->valorTotal = $valorTotal;
+
+        }
+
+        /**
          * Adiciona um novo item de pedido ao pedido
          * @param ItensPedido $itemPedido
          * @return void

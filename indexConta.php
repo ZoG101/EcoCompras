@@ -8,6 +8,12 @@
 
     $cliente = $_SESSION['cliente'];
     $endereco = $_SESSION['endereco'];
+
+    if (!isset($_SESSION['cliente'])) {
+
+        echo "<script>window.location.replace('indexLogin.php');</script>";
+    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
