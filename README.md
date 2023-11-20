@@ -122,5 +122,5 @@ $ git pull
 * Felipe Aparecido Flosi
 * Wendell Franck Nascimento Lavor
 * Pedro Henrique Vanni De Aquino
-* Aquino Davi Campolina Leite Morato
+* Davi Campolina Leite Morato
 * Júlio Cesar Marques
