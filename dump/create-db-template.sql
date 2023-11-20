@@ -4,11 +4,6 @@ CREATE DATABASE Eco_Compras
 
 USE Eco_Compras;
 
-drop table ENDERECO;
-drop table CLIENTE;
-drop table PEDIDO;
-drop table ITEM_PEDIDO;
-
 SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE `CLIENTE` (
@@ -50,32 +45,3 @@ CREATE TABLE `ITEM_PEDIDO` (
     pedido_id INT(10) ZEROFILL NOT NULL,
     Foreign Key (pedido_id) REFERENCES PEDIDO (id)
 );
-
-INSERT INTO cliente VALUES('ecompras', '11111111111', 'eco@gmail.com', 'eco2023', '11111111111');
-INSERT INTO endereco (cep, cidade, estado, rua, numero, bairro, complemento, cliente_email) VALUES('00000000', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'nowhere', 'eco@gmail.com');
-
-INSERT INTO pedido (valor_total, data, estado, cliente_email) VALUES(100.0, '2021-08-04 14:00:00', 0, 'teste12@gmail.com');
-
-INSERT INTO item_pedido (nome_produto, quantidade, valor_unitario, pedido_id) VALUES('mochila', 1, 100, 0000000008);
-
-SELECT endereco.cep, endereco.cidade, endereco.estado, endereco.rua, endereco.numero, endereco.bairro, endereco.complemento FROM cliente JOIN endereco ON endereco.cliente_email = "teste3@gmail.com";
-
-SELECT COUNT(*) FROM cliente JOIN endereco ON endereco.cliente_email = :email;
-
-select * from item_pedido;
-
-select * from cliente;
-
-select * from endereco;
-
-SELECT * FROM cliente WHERE email = :email;
-
-SELECT * FROM pedido;
-
-SELECT id FROM pedido WHERE cliente_email = :email ORDER BY id DESC LIMIT 1;
-
-SELECT * FROM PEDIDO WHERE PEDIDO.cliente_email = :email;
-
-SELECT PEDIDO.id, ITEM_PEDIDO.nome_produto, ITEM_PEDIDO.quantidade, ITEM_PEDIDO.valor_unitario FROM PEDIDO JOIN ITEM_PEDIDO ON PEDIDO.id = ITEM_PEDIDO.pedido_id AND PEDIDO.cliente_email = :email;
-
-UPDATE pedido SET estado = 1;
