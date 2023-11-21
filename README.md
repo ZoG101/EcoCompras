@@ -11,6 +11,9 @@ O aplicativo "EcoCompras" tem como objetivo ajudar os consumidores a fazerem esc
 ![layout_mobile](./imagens_md/layout_mobile.png)
 
 ## Layout Remodelagem Desktop 
+
+![Modelagem](https://github.com/ZoG101/EcoCompras/assets/93394241/b89bb9b1-9d9c-4663-8f39-939c62d23f3e)
+
 [Figma](https://www.figma.com/file/j4h9INukqhoj0DfG7nSrHd/PTI---Remodelagem?type=design&mode=design)
 
 
