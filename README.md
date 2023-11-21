@@ -16,6 +16,9 @@ O aplicativo "EcoCompras" tem como objetivo ajudar os consumidores a fazerem esc
 
 [Figma](https://www.figma.com/file/j4h9INukqhoj0DfG7nSrHd/PTI---Remodelagem?type=design&mode=design)
 
+## Modelagem do Bando de Dados
+
+![image](https://github.com/ZoG101/EcoCompras/assets/93394241/17d01186-3cc3-4e12-a97d-4c3b025c1e8e)
 
 ## Pré-requisitos para rodar o projeto 
 
