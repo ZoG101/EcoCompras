@@ -30,7 +30,7 @@ A aplicação requer um Sistema de Gerenciamento de Banco de Dados (SGBD) relaci
 * <h3>Recriação do Banco de Dados:</h3>
 Os comandos necessários para recriar o banco de dados estão disponíveis na pasta "dump" deste repositório. Certifique-se de seguir esses comandos para configurar corretamente o banco de dados antes de iniciar a aplicação.
 * <h3>Configuração do Servidor:</h3>
-Recomendamos o uso do servidor contido na pasta "server". Para configurá-lo, basta descompactar o conteúdo e colocar os arquivos do projeto dentro da pasta "www". Inicie o servidor Apache utilizando o UniControllerZ.
+Recomendamos o uso do servidor contido na pasta "server". Para configurá-lo, basta descompactar o conteúdo (em uma pasta cujo diretório não possua nunhum espaço entre as palavras) e colocar os arquivos do projeto dentro da pasta "www". Inicie o servidor Apache utilizando o UniControllerZ.
 * <h3>Configuração da Conexão com o MySQL:</h3>
 É crucial configurar a conexão com o servidor local do MySQL para garantir o funcionamento adequado da aplicação. A configuração da conexão está no arquivo localizado em "classes > domain > ConnectionFactory.php". Abra este arquivo e ajuste as configurações de conexão conforme necessário para refletir as configurações do seu ambiente local.
 
