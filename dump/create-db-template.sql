@@ -1,4 +1,4 @@
--- Active: 1699823662542@@127.0.0.1@3307
+-- Active: 1714738621203@@127.0.0.1@3307
 CREATE DATABASE Eco_Compras
     DEFAULT CHARACTER SET = 'utf8mb4';
 
@@ -12,7 +12,21 @@ CREATE TABLE `CLIENTE` (
     email VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
     telefone VARCHAR(12) NOT NULL,
-    PRIMARY KEY (email) 
+    parceiro BOOLEAN NOT NULL DEFAULT FALSE,
+    nome_lojinha VARCHAR(255) NOT NULL DEFAULT 'N/D',
+    PRIMARY KEY (email)
+);
+
+CREATE TABLE `PRODUTO_PARCEIRO` (
+    id BIGINT AUTO_INCREMENT NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    img VARCHAR(255) NOT NULL,
+    preco FLOAT NOT NULL,
+    tamanhos VARCHAR(255) NOT NULL,
+    parceiro_email VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    Foreign Key (parceiro_email) REFERENCES CLIENTE (email)
 );
 
 CREATE TABLE `ENDERECO` (
