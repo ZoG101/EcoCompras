@@ -9,16 +9,18 @@
   use crud\ClienteDAO;
   use crud\EnderecoDAO;
   use models\Cliente;
-  use models\Endereco;
 
   $fail = false;
   $CDAO = new ClienteDAO();
-  $EDAO = new EnderecoDAO();
 ?>
 <?php
-  if (isset($_SESSION['cliente'])) {
+  if (!isset($_SESSION['cliente'])) {
 
-    echo "<script>window.location.replace('indexConta.php');</script>";
+    echo "<script>window.location.replace('indexLogin.php');</script>";
+
+  } else if ($_SESSION['cliente']['parceiro'] == 1) {
+
+    echo "<script>window.location.replace('produtosCliente.php');</script>";
 
   }
 ?>
@@ -27,7 +29,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EcoCompras | Produtos sustentáveis</title>
+    <title>EcoCompras | Seja Parceiro</title>
     <link rel="stylesheet" href="/styles/global.css" />
     <link rel="stylesheet" href="/styles/login.css" />
     <style>
@@ -66,59 +68,30 @@
         </div>
       </div>
     <div class="login-container">
-      <h2>Login</h2>
-      <p>Caso já tenha usuário, faça seu login.</p>
+      <h2>Parceria</h2>
+      <p>Cadastre-se como parceiro e comece a vender agora mesmo!</p>
       <form method="POST" action="">
-        <label for="username">Usuário:</label>
+        <label for="nomeLoja">Nome da Lojinha:</label>
         <input
           type="text"
-          id="username"
-          name="username"
-          placeholder="Seu e-mail"
+          id="nomeLoja"
+          name="nomeLoja"
+          placeholder="Nome da sua lojinha"
           required
         />
-
-        <label for="password">Senha:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Sua senha"
-          required
-        />
-        <button type="submit">Acessar</button>
-        <a href="indexCadastro.php" class="button-scroll"
-          >É novo? Cadastre-se</a
+        <button type="submit">Começar a vender!</button>
+        <p class="button-scroll"
+          >Toda venda tem uma taxa de 5%</p
         >
       </form>
       <?php
-        if ((isset($_POST['username'])) && isset($_POST['password'])) {
+        if (isset($_POST['nomeLoja'])) {
+            $_POST['nomeLoja'] = strtoupper($_POST['nomeLoja']);
 
-          if (!$CDAO->verificaSeExisteCliente($_POST['username'])) {
+          if ($CDAO->verificaSeExisteLoja($_POST['nomeLoja'])) {
 
-            echo "<p class='fail erro'>Usuário ou senha estão incorretos</p>";
+            echo "<spam class='fail erro'>Nome de loja já está em uso</spam>";
             $fail = true;
-
-          }
-
-          try {
-
-            $cliente = $CDAO->buscaCliente($_POST['username'],);
-
-          } catch (\Throwable $th) {
-            
-            $fail = true;
-
-          }
-
-          if (!$fail) {
-
-            if ($_POST['password'] != $cliente->getSenha()) {
-
-              $fail = true;
-              echo "<p class='fail'>Usuário ou senha estão incorretos</p>";
-
-            }
 
           }
 
@@ -126,46 +99,23 @@
 
             try {
 
-              $endereco = $EDAO->buscaEndereco($cliente);
-              $cliente->setEndereco($endereco);
-
+                $cliente = $CDAO->mudaStatusClienteParaParceiro($_SESSION['cliente']['email'], $_POST['nomeLoja']);
+    
             } catch (\Throwable $th) {
-
-              $fail = true;
-
+                
+                $fail = true;
+                if ($fail) echo "<p class='fail erro'>".$th->getMessage()."</p>";
+    
             }
 
           }
 
           if (!$fail) {
 
-            $_SESSION['cliente'] = [
-              'nome'=> $cliente->getNome(),
-              'cpf'=> $cliente->getCpf(),
-              'email'=> $cliente->getEmail(),
-              'telefone'=> $cliente->getTelefone(),
-              'parceiro'=> $cliente->getClienteParceiro(),
-              'nomeLojinha'=> $cliente->getNomeLojinha()
-            ];
-            $_SESSION['endereco'] = [
-              'cep'=> $endereco->getCep(),
-              'cidade'=> $endereco->getCidade(),
-              'estado'=> $endereco->getEstado(),
-              'rua'=> $endereco->getRua(),
-              'numero'=> $endereco->getNumero(),
-              'bairro'=> $endereco->getBairro(),
-              'complemento'=> $endereco->getComplemento()
-            ];
-
-            if (isset($_SESSION['produtos'])) {
-
-              echo "<script>window.location.replace('indexCarrinho.php');</script>";
-
-            } else {
-
-              echo "<script>window.location.replace('indexConta.php');</script>";
-
-            }
+            $_SESSION['cliente']['parceiro'] = 1; 
+            $_SESSION['cliente']['nomeLojinha'] = $_POST['nomeLoja'];
+              
+            echo "<script>window.location.replace('produtosCliente.php');</script>";
 
           }
 

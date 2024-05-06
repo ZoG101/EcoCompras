@@ -70,6 +70,8 @@
                 $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
                 $endereco = new Endereco("N/D", "N/D", "N/D", "N/D", "N/D", "N/D", "N/D");
                 $cliente = new Cliente($fetch["nome"], $fetch["cpf"], $fetch["email"], $fetch["telefone"], $fetch["senha"], $endereco);
+                $cliente->setClienteParceiro($fetch["parceiro"]);
+                $cliente->setNomeLojinha($fetch["nome_lojinha"]);
                 return $cliente;
 
             } catch (\Throwable $th) {
@@ -151,6 +153,62 @@
                 
             }
 
+        }
+
+        /**
+         * Método que verifica a existencia de um nome de loja.
+         * Retorn `true` se existe e `false` se não existe.
+         * @param string $lojaNome
+         * @return bool
+         */
+        public function verificaSeExisteLoja(string $lojaNome): bool {
+
+            $sql = "SELECT nome_lojinha FROM cliente WHERE nome_lojinha = :lojaNome;";
+            $stmt = $this->getCon()->prepare($sql);
+            $stmt->bindParam(":lojaNome", $lojaNome);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($result) > 0) {
+
+                return true;
+
+            } else {
+
+                return false;
+                
+            }
+
+        }
+
+        public function mudaStatusClienteParaParceiro(string $email, string $lojaNome): bool {
+
+            if (!$this->verificaSeExisteCliente($email)) return throw new InvalidArgumentException("Cliente não existe!");
+
+            $sql = "UPDATE `cliente` SET `parceiro` = 1, `nome_lojinha` = :lojaNome WHERE `cliente`.`email` = :email;";
+            $this->con->beginTransaction();
+            $stmt = $this->getCon()->prepare($sql);
+
+            $stmt->bindParam(":lojaNome", $lojaNome);
+            $stmt->bindParam(":email", $email);
+
+            $result = false;
+
+            try {
+                
+                $result = $stmt->execute();
+                $this->con->commit();
+
+            } catch (\Throwable $th) {
+                
+                $this->con->rollBack();
+                print($th->getMessage());
+                exit;
+
+            }
+
+            return $result;
+            
         }
 
     }

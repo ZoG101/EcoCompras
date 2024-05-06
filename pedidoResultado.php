@@ -37,6 +37,17 @@
                 <li><a href="indexProdutos.php" onclick="markClicked(this)">PRODUTOS</a></li>
                 <li><a href="indexLogin.php" onclick="markClicked(this)">MINHA CONTA</a></li>
                 <li><a href="indexCarrinho.php" onclick="markClicked(this)">CARRINHO</a></li>
+                <?php 
+                  if ((isset($_SESSION['cliente'])) && ($_SESSION['cliente']['parceiro'] == 1)) {
+
+                    echo '<li><a href="produtosCliente.php" onclick="markClicked(this)">MINHA LOJA</a></li>';
+                  
+                  } else if ((isset($_SESSION['cliente'])) && ($_SESSION['cliente']['parceiro'] == 0)) {
+
+                    echo '<li><a href="tornarParceiro.php" onclick="markClicked(this)">SEJA PARCEIRO</a></li>';
+
+                  }
+                ?>
               </ul>
             </nav>
             <div class="nav-icon-container"></div>

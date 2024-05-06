@@ -59,3 +59,5 @@ CREATE TABLE `ITEM_PEDIDO` (
     pedido_id INT(10) ZEROFILL NOT NULL,
     Foreign Key (pedido_id) REFERENCES PEDIDO (id)
 );
+
+select * from CLIENTE;

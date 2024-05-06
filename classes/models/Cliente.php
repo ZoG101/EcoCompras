@@ -41,6 +41,16 @@
          * @var string
          */
         private string $senha;
+        /**
+         * Status do cliente
+         * @var int
+         */
+        private int $clienteParceiro;
+        /**
+         * Nome da lojinha do cliente parceiro
+         * @var string
+         */
+        private string $nomeLojinha;
 
         /**
          * Endereço do cliente
@@ -128,9 +138,52 @@
 
         }
 
+        /**
+         * Retorna o status do cliente.
+         * Caso "0", não é parceiro.
+         * Caso "1", é parceiro.
+         * @return int
+         */
+        public function getClienteParceiro (): int {
+
+            return $this->clienteParceiro;
+
+        }
+
+        /**
+         * Retorna o nome da lojinha do cliente parceiro.
+         * @return string
+         */
+        public function getNomeLojinha (): string {
+
+            return $this->nomeLojinha;
+
+        }
+
+        /**
+         * Define o objeto que representa o endereço do cliente
+         */
         public function setEndereco(Endereco $endereco): void {
 
             $this->endereco = $endereco;
+
+        }
+
+        /**
+         * Define o status do cliente como parceiro ou não
+         */
+        public function setClienteParceiro (int $status): void {
+
+            $this->clienteParceiro = $status;
+
+        }
+
+        /**
+         * Define o nome da lojinha do cliente parceiro
+         */
+        public function setNomeLojinha (string $nomeLojinha): void {
+
+            $this->nomeLojinha = $nomeLojinha;
 
         }
 
