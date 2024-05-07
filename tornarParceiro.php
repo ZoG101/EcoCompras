@@ -86,11 +86,12 @@
       </form>
       <?php
         if (isset($_POST['nomeLoja'])) {
+
             $_POST['nomeLoja'] = strtoupper($_POST['nomeLoja']);
 
           if ($CDAO->verificaSeExisteLoja($_POST['nomeLoja'])) {
 
-            echo "<spam class='fail erro'>Nome de loja já está em uso</spam>";
+            echo "<spam class='fail erro' style='font-size:1.0em;'>Nome de loja já está em uso</spam>";
             $fail = true;
 
           }
@@ -104,7 +105,7 @@
             } catch (\Throwable $th) {
                 
                 $fail = true;
-                if ($fail) echo "<p class='fail erro'>".$th->getMessage()."</p>";
+                if ($fail) echo "<p class='fail erro' style='font-size:1.0em;'>".$th->getMessage()."</p>";
     
             }
 
@@ -122,7 +123,7 @@
         }
       ?>
     </div>
-    <footer class="green-background" style="position: fixed; bottom: 0; width: 100%; padding: 10px;">      <div class="page-inner-content footer-content">
+    <footer class="green-background" style="bottom: 0; width: 100%; padding: 10px;">      <div class="page-inner-content footer-content">
           <div class="logo-footer">
               <h1 class="logo">Eco<span>Compras</span></h1>
               <p>100% de produtos sustentáveis!</p>

@@ -461,6 +461,10 @@ body {
     position: relative;
 }
 
+.conta-container > spam {
+    align-self: center;
+}
+
 .conta-container h2 {
     font-size: 1.5rem;
     margin: 20px 0;
@@ -469,6 +473,10 @@ body {
 .conta-container p {
     font-size: 1.2rem;
     margin-bottom: 0px;
+}
+
+.success {
+    color:rgb(75, 238, 78);
 }
 
 table {

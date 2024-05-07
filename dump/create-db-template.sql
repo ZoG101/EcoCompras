@@ -22,8 +22,8 @@ CREATE TABLE `PRODUTO_PARCEIRO` (
     nome VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     img VARCHAR(255) NOT NULL,
-    preco FLOAT NOT NULL,
-    tamanhos VARCHAR(255) NOT NULL,
+    preco VARCHAR(255) NOT NULL,
+    tamanhos VARCHAR(10) NOT NULL DEFAULT 'SEM',
     parceiro_email VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     Foreign Key (parceiro_email) REFERENCES CLIENTE (email)
