@@ -48,6 +48,16 @@
          * @var string
          */
         private Cliente $cliente;
+        /**
+         * Nome da lojinha que postou o produto.
+         * @var string
+         */
+        private string $nomeLojinha;
+        /**
+         * Email da loja
+         * @var string
+         */
+        private string $emailLoja;
 
         /**
          * Construtor de Produto que já recebe por padrão
@@ -77,6 +87,40 @@
          */
         public function setId (int $id): void {
             $this->id = $id;
+        }
+
+        /**
+         * Define o nome da lojinha dona do produto.
+         * @return void
+         * @param string $nomeLojinha Nome da lojinha do produto
+         */
+        public function setNomeLojinha (string $nomeLojinha): void {
+            $this->nomeLojinha = $nomeLojinha;
+        }
+
+        /**
+         * Define o email da lojinha dona do produto.
+         * @return void
+         * @param string $email Email da lojinha do produto
+         */
+        public function setEmail (string $email): void {
+            $this->emailLoja = $email;
+        }
+
+        /**
+         * Retorna o email da lojinha dona do produto.
+         * @return string
+         */
+        public function getEmail (): string {
+            return $this->emailLoja;
+        }
+
+        /**
+         * Retorna o nome da lojinha dona do produto.
+         * @return string
+         */
+        public function getNomeLojinha (): string {
+            return $this->nomeLojinha;
         }
 
         /**

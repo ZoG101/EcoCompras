@@ -97,7 +97,7 @@
         }
 
         /**
-         * Método que verifica a existencia de um produto.
+         * Método que verifica a existência de um produto relacionado com cliente.
          * Retorn `true` se existe e `false` se não existe.
          * @param Cliente $cliente
          * @throws InvalidArgumentException
@@ -115,6 +115,40 @@
             $stmt->bindParam(":email", $email);
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($result) > 0) {
+
+                return true;
+
+            } else {
+
+                return false;
+                
+            }
+
+        }
+
+        /**
+         * Método que verifica a existência de um produto parceiro.
+         * Retorn `true` se existe e `false` se não existe.
+         * @return bool
+         */
+        public function verificaSeExisteAlgumProduto(): bool {
+
+            $sql = "SELECT nome FROM `PRODUTO_PARCEIRO` limit 1;";
+            $stmt = $this->getCon()->prepare($sql);
+
+            $result = array();
+
+            try {
+
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            } catch (\Throwable $th) {
+                echo($th->getMessage());
+                exit;
+            }
 
             if (count($result) > 0) {
 
@@ -172,14 +206,70 @@
 
         }
 
-         /**
+        /**
+         * Método que busca os produtos no banco de dados
+         * @param Cliente $cliente
+         * @return array
+         * @throws InvalidArgumentException
+         */
+        public function puxaProdutos(Cliente $cliente): array {
+
+            $sql = "SELECT * FROM `PRODUTO_PARCEIRO`";
+            $stmt = $this->getCon()->prepare($sql);
+
+            $fetchProdutos = null;
+
+            try {
+
+                $stmt->execute();
+                $fetchProdutos = $stmt->fetchAll();
+
+            } catch (\Throwable $th) {
+
+                print($th->getMessage());
+                exit;
+
+            }
+
+            $produtos = array();
+
+            foreach ($fetchProdutos as $key => $value) {
+                
+                $produtos [$key] = new Produto($fetchProdutos[$key]['nome'], $fetchProdutos[$key]['preco'], $fetchProdutos[$key]['descricao'], $fetchProdutos[$key]['img'], $fetchProdutos[$key]['tamanhos'], $cliente);
+                $produtos [$key] -> setId($fetchProdutos[$key]['id']);
+
+                try {
+
+                    $sql = "SELECT nome_lojinha FROM `CLIENTE` WHERE email = :email;";
+                    $stmt = $this->getCon()->prepare($sql);
+                    $email = $fetchProdutos[$key]['parceiro_email'];
+                    $produtos [$key] -> setEmail($email);
+                    $stmt->bindParam(":email", $email);
+                    $stmt->execute();
+                    $fetchNomeLojinha = $stmt->fetchAll();
+                    $produtos [$key] -> setNomeLojinha($fetchNomeLojinha[0]['nome_lojinha']);
+
+                } catch (\Throwable $th) {
+
+                    print($th->getMessage());
+                    exit;
+
+                }
+
+            }
+
+            return $produtos;
+
+        }
+
+        /**
          * Método que atualiza os dados de um produto no banco de dados
          * @param string $id
          * @param string $email
          * @param string $diretorioUser
          * @return bool
          * @throws InvalidArgumentException
-         */
+        */
         public function deletaProduto(string $id, string $email, string $diretorioUser): bool {
 
             $CDAO = new ClienteDAO();

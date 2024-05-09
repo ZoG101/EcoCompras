@@ -555,7 +555,7 @@
 
               }
 
-              echo "<div class='product' style='height: 20%; width:100%;'>
+              echo "<div class='product' style='height: 20%; width:100%; max-width:550px;'>
                       <img src='./imagens-parceiro/". $_SESSION['cliente']['email'] ."/". $produto->getImagem() . "' alt='" . $produto->getNome() . "'>
                       <div class='produto-info'>
                         <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>" . $produto->getNome() . "</h3>

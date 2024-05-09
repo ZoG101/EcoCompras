@@ -2,6 +2,16 @@
 <?php
     require_once 'classes\helper\Contador.php';
 
+    require_once 'classes\models\Produto.php';
+    require_once 'classes\crud\ProdutoDAO.php';
+    require_once 'classes\models\Cliente.php';
+    require_once 'classes\models\Endereco.php';
+
+    use crud\ProdutoDAO;
+    use models\Produto;
+    use models\Cliente;
+    use models\Endereco;
+
     use helper\Contador;
 
     if (!isset($_SESSION['prodCont'])) {
@@ -15,6 +25,24 @@
         $prodCont->setCont($_SESSION['prodCont']);
 
     }
+
+    $produto = null;
+    $cliente = null;
+    $endereco = null;
+    $produtoDAO = null;
+
+    try {
+
+        $endereco = new Endereco('N/D', 'N/D', 'N/D', 'N/D', 'N/D', 'N/D', 'N/D',);
+        $cliente = new Cliente($_SESSION['cliente']['nome'], $_SESSION['cliente']['cpf'], $_SESSION['cliente']['email'], $_SESSION['cliente']['telefone'], 'N/D', $endereco);
+        $produtoDAO = new produtoDAO();
+
+    } catch (\Throwable $th) {
+        
+        echo $th->getMessage();
+        
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -67,7 +95,7 @@
         <!-- Seus produtos aqui -->
         <div class="product" id="produto1">
             <img src="imagens-pti/camisetaCinza.png" alt="Camisetas Básica" />
-            <h3>Camiseta Unisex Cinza</h3>
+            <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>Camiseta Unisex Cinza</h3>
             <p>Cor: Cinza</p>
             <form method="POST" action="">
                 <p><strong>Tamanhos:</strong>
@@ -80,7 +108,8 @@
                         <label id="produtoLabel1G" for="Camiseta-Unisex-Cinza-G" onclick="marcaSelecionado('produtoLabel1G')">G</label>
                     </div>
                 </p>
-                <p class="price">R$ 50.00</p>
+                <p>Loja: EcoCompras</p>
+                <p class="price">R$ 50,00</p>
                 <input type="hidden" name="preco" value="50">
                 <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
             </form>
@@ -88,7 +117,7 @@
 
         <div class="product" id="produto2">
             <img src="imagens-pti/CamisetaPreta.png" alt="Camisetas Básica" />
-            <h3>Camiseta Unisex Preta</h3>
+            <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>Camiseta Unisex Preta</h3>
             <p>Cor: Preta</p>
                 <form method="POST" action="">
                 <p><strong>Tamanhos:</strong>
@@ -101,7 +130,8 @@
                         <label id="produtoLabel2G" for="Camiseta-Unisex-Preto-G" onclick="marcaSelecionado('produtoLabel2G')">G</label>
                     </div>
                 </p>
-                <p class="price">R$ 50.00</p>
+                <p>Loja: EcoCompras</p>
+                <p class="price">R$ 50,00</p>
                 <input type="hidden" name="preco" value="50">
                 <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
             </form>
@@ -109,7 +139,7 @@
 
         <div class="product" id="produto3">
             <img src="imagens-pti/CamistaBranca.png" alt="Camisetas Básica" />
-            <h3>Camiseta Unisex Branca</h3>
+            <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>Camiseta Unisex Branca</h3>
             <p>Cor: Branca</p>
             <form method="POST" action="">
                 <p><strong>Tamanhos:</strong>
@@ -122,7 +152,8 @@
                         <label id="produtoLabel3G" for="Camiseta-Unisex-Branca-G" onclick="marcaSelecionado('produtoLabel3G')">G</label>
                     </div>
                 </p>
-                <p class="price">R$ 50.00</p>
+                <p>Loja: EcoCompras</p>
+                <p class="price">R$ 50,00</p>
                 <input type="hidden" name="preco" value="50">
                 <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
             </form>
@@ -130,9 +161,10 @@
 
         <div class="product" id="produto4">
             <img src="imagens-pti/bagSust.png" alt="Sacola Sustentável" />
-            <h3>Sacola Sustentável</h3>
+            <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>Sacola Sustentável</h3>
             <p>Sacola sustentável feita de material 100% reciclável</p>
-            <p class="price">R$ 30.00</p>
+            <p>Loja: EcoCompras</p>
+            <p class="price">R$ 30,00</p>
             <form method="POST" action="">
                 <input type="hidden" name="produto" value="Sacola Sustentável">
                 <input type="hidden" name="preco" value="30">
@@ -142,9 +174,10 @@
 
         <div class="product" id="produto5">
             <img src="imagens-pti/escovSust.png" alt="Escova de Dente Sustentável" />
-            <h3>Escova de Dente Sustentável</h3>
+            <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>Escova de Dente Sustentável</h3>
             <p>Escova de Dente material feito de bambu 100% reciclável</p>
-            <p class="price">R$ 35.00</p>
+            <p>Loja: EcoCompras</p>
+            <p class="price">R$ 35,00</p>
             <form method="POST" action="">
                 <input type="hidden" name="produto" value="Escova de Dente Sustentável">
                 <input type="hidden" name="preco" value="35">
@@ -154,16 +187,92 @@
 
         <div class="product" id="produto6">
             <img src="imagens-pti/mochilaSust.png" alt="Mochila Reciclável" />
-            <h3>Mochila Reciclável</h3>
+            <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>Mochila Reciclável</h3>
             <p>Mochila produzida com material 100% reciclável. Remenda-se carregar até 8kg</p>
-            <p class="price">R$ 250.00</p>
+            <p>Loja: EcoCompras</p>
+            <p class="price">R$ 250,00</p>
             <form method="POST" action="">
                 <input type="hidden" name="produto" value="Mochila Reciclável">
                 <input type="hidden" name="preco" value="250">
                 <button type="submit" class="addToCartBtn">Adicionar ao Carrinho</button>
             </form>
         </div>
+        <?php
+        if ($produtoDAO->verificaSeExisteAlgumProduto()) {
+
+            $fail = false;
+            $produtos = array();
+
+            try {
+
+                $produtos = $produtoDAO->puxaProdutos($cliente);
+
+            } catch (\Throwable $th) {
+
+                echo "<spam class='fail erro' style='font-size:1.0em;'>Não foi possível Trazer os produtos até você :(</spam>";
+                $fail = true;
+
+            }
+
+            if (!$fail) {
+
+                foreach ($produtos as $produto) {
+
+                    echo "<div class='product' id='produto-parceiro".$produto->getId()."'>
+                    <img src='./imagens-parceiro/".$produto->getEmail().'/'.$produto->getImagem()."' alt='".$produto->getNome()."' />
+                    <h3 style='text-align:center; align-self: center; font-size:1.6em; text-color: red;'>".$produto->getNome()."</h3>
+                    <p>Descrição: ".$produto->getDescricao()."</p>
+                    <form method='POST' action=''>
+                        <p><strong>Tamanhos:</strong>
+                            <div class='tamanho-box'>";
+                            if (strlen($produto->getTamanhos()) > 0) {
+
+                                for ($i=0; $i < (strlen($produto->getTamanhos())); $i++) { 
+                                    
+                                    if ($i === 0) { 
+
+                                        $tamanho = substr($produto->getTamanhos(), $i, $i+1);
+
+                                        echo "<input type='radio' id='".$produto->getId().$tamanho."' name='produto' value='".$produto->getNome()." - ".$tamanho."' checked hidden>
+                                        <label class='selected' id='produtoLabel".$tamanho.$produto->getId()."' for='".$produto->getId().$tamanho."' onclick=marcaSelecionado('produtoLabel".$tamanho.$produto->getId()."')>".$tamanho."</label>";
+
+                                    } else {
+
+                                        $tamanho = substr($produto->getTamanhos(), $i, $i);
+
+                                        echo "<input type='radio' id='".$produto->getId().$tamanho."' name='produto' value='".$produto->getNome()." - ".$tamanho."' hidden>
+                                        <label id='produtoLabel".$tamanho.$produto->getId()."' for='".$produto->getId().$tamanho."' onclick=marcaSelecionado('produtoLabel".$tamanho.$produto->getId()."')>".$tamanho."</label>";
+
+                                    }
+
+                                }
+
+                            } else {
+
+                                $tamanho = 'Tamanho único';
+
+                                echo "<input type='radio' id='".$produto->getId().$tamanho."' name='produto' value='".$produto->getNome()." - ".$tamanho."' checked hidden>
+                                <label class='selected' id='produtoLabel".$tamanho.$produto->getId()."' for='".$produto->getId().$tamanho."' onclick=marcaSelecionado('produtoLabel".$tamanho.$produto->getId()."')>".$tamanho."</label>";
+
+                            }
+                            $preco = str_replace('R$', '', $produto->getPreco());
+                        echo"</div>
+                        </p>
+                        <p>Loja: ".$produto->getNomeLojinha()."</p>
+                        <p class='price'>R$ ".$preco."</p>
+                        <input type='hidden' name='preco' value='".str_replace(',', '.',$preco)."'>
+                        <button type='submit' class='addToCartBtn'>Adicionar ao Carrinho</button>
+                    </form>
+                </div>";
+
+                }
+
+            }
+
+        }
+    ?>
     </div>
+    
     <?php
         //recebe requisição POST
         if (isset($_POST['produto'])) {
