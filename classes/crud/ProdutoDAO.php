@@ -176,10 +176,11 @@
          * Método que atualiza os dados de um produto no banco de dados
          * @param string $id
          * @param string $email
+         * @param string $diretorioUser
          * @return bool
          * @throws InvalidArgumentException
          */
-        public function deletaProduto(string $id, string $email): bool {
+        public function deletaProduto(string $id, string $email, string $diretorioUser): bool {
 
             $CDAO = new ClienteDAO();
 
@@ -206,8 +207,53 @@
 
             if ($result[0]['parceiro_email'] != $email) return throw new InvalidArgumentException("Produto não pertence a esse cliente!");
 
-            $sql = "DELETE FROM `PRODUTO_PARCEIRO` WHERE id = :id;";
             $this->con->beginTransaction();
+
+            if (!is_dir($diretorioUser)) {
+
+                $this->con->rollBack();
+                return throw new InvalidArgumentException("Diretório não existe!");
+
+            }
+
+            $sql = "SELECT img FROM `PRODUTO_PARCEIRO` WHERE id = :id;";
+
+            $stmt = $this->getCon()->prepare($sql);
+            $stmt->bindParam(":id", $id);
+
+            $img = array();
+
+            try {
+
+                $stmt->execute();
+                $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            } catch (\Throwable $th) {
+
+                print($th->getMessage());
+                exit;
+
+            }
+
+            $file = $diretorioUser . "/" . $img[0]['img'];
+
+            if (file_exists($file)) {
+    
+                try {
+
+                    unlink($file);
+
+                } catch (\Throwable $th) {
+
+                    $this->con->rollBack();
+                    print($th->getMessage());
+                    exit;
+
+                }
+
+            }
+
+            $sql = "DELETE FROM `PRODUTO_PARCEIRO` WHERE id = :id;";
             $stmt = $this->getCon()->prepare($sql);
             $stmt->bindParam(":id", $id);
 
@@ -235,10 +281,11 @@
          * @param string $id
          * @param string $email
          * @param Produto $produto
+         * @param string $diretorioUser
          * @return bool
          * @throws InvalidArgumentException
          */
-        public function atualizaProduto(string $id, string $email, Produto $produto): bool {
+        public function atualizaProduto(string $id, string $email, Produto $produto, string $diretorioUser): bool {
 
             $CDAO = new ClienteDAO();
 
@@ -264,6 +311,86 @@
             }
 
             if ($result[0]['parceiro_email'] != $email) return throw new InvalidArgumentException("Produto não pertence a esse cliente!");
+
+            $this->con->beginTransaction();
+
+            if (!is_dir($diretorioUser)) {
+
+                $this->con->rollBack();
+                return throw new InvalidArgumentException("Diretório não existe!");
+
+            }
+
+            $sql = "SELECT img FROM `PRODUTO_PARCEIRO` WHERE id = :id;";
+
+            $stmt = $this->getCon()->prepare($sql);
+            $stmt->bindParam(":id", $id);
+
+            $img = array();
+
+            try {
+
+                $stmt->execute();
+                $img = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            } catch (\Throwable $th) {
+
+                print($th->getMessage());
+                exit;
+
+            }
+
+            $file = $diretorioUser . "/" . $img[0]['img'];
+
+            if (file_exists($file)) {
+    
+                try {
+
+                    unlink($file);
+
+                } catch (\Throwable $th) {
+
+                    $this->con->rollBack();
+                    print($th->getMessage());
+                    exit;
+
+                }
+
+            }
+
+            $sql = "UPDATE `PRODUTO_PARCEIRO` SET nome = :nome, descricao = :descricao, img = :img, preco = :preco, tamanhos = :tamanhos  WHERE id = :id;";
+            $stmt = $this->getCon()->prepare($sql);
+
+            $nome = $produto->getNome();
+            $descricao = $produto->getDescricao();
+            $img = $produto->getImagem();
+            $preco = $produto->getPreco();
+            $tamanhos = $produto->getTamanhos();
+            $parceiroEmail = $produto->getCliente()->getEmail();
+
+            $stmt->bindParam(":nome", $nome);
+            $stmt->bindParam(":descricao", $descricao);
+            $stmt->bindParam(":img", $img);
+            $stmt->bindParam(":preco", $preco);
+            $stmt->bindParam(":tamanhos", $tamanhos);
+            $stmt->bindParam(":id", $id);
+
+            $result = false;
+
+            try {
+
+                $result = $stmt->execute();
+                $this->con->commit();
+
+            } catch (\Throwable $th) {
+
+                $this->con->rollBack();
+                print($th->getMessage());
+                exit;
+
+            }
+
+            return $result;
                 
         }
 

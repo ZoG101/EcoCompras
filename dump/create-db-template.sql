@@ -60,4 +60,4 @@ CREATE TABLE `ITEM_PEDIDO` (
     Foreign Key (pedido_id) REFERENCES PEDIDO (id)
 );
 
-select * from cliente;
+select * from PRODUTO_PARCEIRO;

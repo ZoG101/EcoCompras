@@ -227,6 +227,9 @@
                 
               var btnExluir = document.querySelector("#btn-exluir-"+id);
               btnExluir.setAttribute("hidden", "hidden");
+
+              var btnAtualiza = document.querySelector("#btn-atualizar-"+id);
+              btnAtualiza.setAttribute("hidden", "hidden");
         
               var btnSim = document.querySelector("#btn-sim-"+id);
               btnSim.removeAttribute("hidden", "hidden");
@@ -242,7 +245,10 @@
 
         function naoApertado(id){
             $(document).ready(function() {
-                
+              
+              var btnAtualiza = document.querySelector("#btn-atualizar-"+id);
+              btnAtualiza.removeAttribute("hidden", "hidden");
+
               var btnExluir = document.querySelector("#btn-exluir-"+id);
               btnExluir.removeAttribute("hidden", "hidden");
         
@@ -269,6 +275,30 @@
 
               var btnExluir = document.querySelector("#btn-exluir-"+id);
               btnExluir.setAttribute("hidden", "hidden");
+        
+              var btnSim = document.querySelector("#btn-sim-"+id);
+              btnSim.setAttribute("hidden", "hidden");
+
+              var btnNao = document.querySelector("#btn-nao-"+id);
+              btnNao.setAttribute("hidden", "hidden");
+
+              var spam = document.querySelector("#spam-"+id);
+              spam.setAttribute("hidden", "hidden");
+              
+            });
+        }
+
+        function atualizaCancelaApertado(id){
+            $(document).ready(function() {
+              
+              var formAtualiza = document.querySelector("#formAtualizacao"+id);
+              formAtualiza.setAttribute("hidden", "hidden");
+
+              var btnAtualiza = document.querySelector("#btn-atualizar-"+id);
+              btnAtualiza.removeAttribute("hidden", "hidden");
+
+              var btnExluir = document.querySelector("#btn-exluir-"+id);
+              btnExluir.removeAttribute("hidden", "hidden");
         
               var btnSim = document.querySelector("#btn-sim-"+id);
               btnSim.setAttribute("hidden", "hidden");
@@ -381,35 +411,35 @@
             $type = substr($_FILES['imagem']['type'], 0, 5);
 
             if (!($type === 'image')) {
-                echo "<spam class='fail erro' style='font-size:1.0em;'>Só é permitido o envio de imagens!</spam>";
-                $fail = true;
+              echo "<spam class='fail erro' style='font-size:1.0em;'>Só é permitido o envio de imagens!</spam>";
+              $fail = true;
             }
 
             if (!$fail) {
 
-                $nomeProduto = $_POST['nomeProduto'];
-                $descricaoProduto = $_POST['descricaoProduto'];
-                $tamanhos = $_POST['tamanhos'][0] . $_POST['tamanhos'][1] . $_POST['tamanhos'][2];
-                $preco = $_POST['precoProduto'];
-                $imagem = $_FILES['imagem'];
+              $nomeProduto = $_POST['nomeProduto'];
+              $descricaoProduto = $_POST['descricaoProduto'];
+              $tamanhos = $_POST['tamanhos'][0] . $_POST['tamanhos'][1] . $_POST['tamanhos'][2];
+              $preco = $_POST['precoProduto'];
+              $imagem = $_FILES['imagem'];
 
-                $diretorio = 'D:/documentos/UniformServer/UniServerZ/www/imagens-parceiro/'. $_SESSION['cliente']['email'];
+              $diretorio = './imagens-parceiro/'. $_SESSION['cliente']['email'];
 
-                if(!is_dir($diretorio)){
-                  mkdir($diretorio);
-                }
+              if(!is_dir($diretorio)){
+                mkdir($diretorio);
+              }
 
-                $concertado = str_replace(' ', '', date('Y-m-d H:i:i') . date('U') . $nomeProduto . $imagem['name']);
-                $concertado = str_replace('-', '', $concertado);
-                $concertado = str_replace(':', '', $concertado);
-                $concertado = str_replace('_', '', $concertado);
+              $concertado = str_replace(' ', '', date('Y-m-d H:i:i') . date('U') . $nomeProduto . $imagem['name']);
+              $concertado = str_replace('-', '', $concertado);
+              $concertado = str_replace(':', '', $concertado);
+              $concertado = str_replace('_', '', $concertado);
 
-                $diretorio = $diretorio . '/' . $concertado;
+              $diretorio = $diretorio . '/' . $concertado;
 
-                if (file_exists($diretorio)) {
-                  echo "<spam class='fail erro' style='font-size:1.0em;'>Já existe um produto com esse nome!</spam>";
-                  $fail = true;
-                }
+              if (file_exists($diretorio)) {
+                echo "<spam class='fail erro' style='font-size:1.0em;'>Já existe um produto com esse nome!</spam>";
+                $fail = true;
+              }
 
             }
 
@@ -440,43 +470,43 @@
 
                 if (($resultado) && (!$fail)) {
                     
-                    echo "<script>
-                    Swal.fire({
-                    title: 'Produto cadastrado!',
-                    text: 'Você já pode ver seus produtos em MEUS PRODUTOS!',
-                    icon: 'success',
-                    showCancelButton: false,
-                    confirmButtonText: 'Continuar',
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redireciona para a página de carrinho após adicionar o produto
-                        window.location.href = 'produtosCliente.php';
-                    } else {
-                        // Continua na página atual
-                        window.location.href = 'produtosCliente.php';
-                    }
-                    });
-                    </script>";
+                  echo "<script>
+                  Swal.fire({
+                  title: 'Produto cadastrado!',
+                  text: 'Você já pode ver seus produtos em MEUS PRODUTOS!',
+                  icon: 'success',
+                  showCancelButton: false,
+                  confirmButtonText: 'Continuar',
+                  }).then((result) => {
+                  if (result.isConfirmed) {
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
+                  } else {
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
+                  }
+                  });
+                  </script>";
                 
                 } else {
 
-                    echo "<script>
-                    Swal.fire({
-                    title: 'Erro ao cadastrar produto! :(',
-                    text: 'Tente novamente!',
-                    icon: 'error',
-                    showCancelButton: false,
-                    confirmButtonText: 'Continuar',
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Redireciona para a página de carrinho após adicionar o produto
-                        window.location.href = 'produtosCliente.php';
-                    } else {
-                        // Continua na página atual
-                        window.location.href = 'produtosCliente.php';
-                    }
-                    });
-                    </script>";
+                  echo "<script>
+                  Swal.fire({
+                  title: 'Erro ao cadastrar produto! :(',
+                  text: 'Tente novamente!',
+                  icon: 'error',
+                  showCancelButton: false,
+                  confirmButtonText: 'Continuar',
+                  }).then((result) => {
+                  if (result.isConfirmed) {
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
+                  } else {
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
+                  }
+                  });
+                  </script>";
 
                 }
 
@@ -538,7 +568,7 @@
                         <form action='' method='post'>
                           <input name='excluirProdutoParceiro' value='" . $produto->getId() . "' hidden>
                           <button type='button' style='background-color:red;' id='btn-exluir-".$produto->getId()."' onclick='deleteApertado(".$produto->getId().")'>Exluir</button>
-                          <button type='button' style='background-color:yellow;' id='btn-atualizar-".$produto->getId()."' onclick='atualizaApertado(".$produto->getId().")'>Atualizar</button>
+                          <button type='button' id='btn-atualizar-".$produto->getId()."' onclick='atualizaApertado(".$produto->getId().")'>Atualizar</button>
                           <button type='submit' style='background-color:red;' id='btn-sim-".$produto->getId()."' hidden>Sim</button>
                           <button type='button' id='btn-nao-".$produto->getId()."' onclick='naoApertado(".$produto->getId().")' hidden>Não</button hidden>
                         </form>
@@ -597,7 +627,9 @@
 
                           <label for='precoProduto".$produto->getId()."'>Preço do produto:</label>
                           <input type='text' name='precoProdutoAtualiza' id='precoProduto".$produto->getId()."' pattern='^\R\\$\d{1,3}(.\d{3})*(\,\d+)?$' value='' data-type='currency' placeholder='R$1.000,00' maxlength='100' oninput=atualizaCurrency('precoProduto".$produto->getId()."') onblur=atualizaCurrencyBlur('precoProduto".$produto->getId()."') required>
-
+                          
+                          <input name='atualizaProdutoParceiro' value='" . $produto->getId() . "' hidden>
+                          <button type='button' style='background-color:red;' id='cancelaAtt-btn".$produto->getId()."' onclick='atualizaCancelaApertado(".$produto->getId().")'>Cancelar</button>
                           <button type='submit'>Atualizar Produto</button>
                       </form>
 
@@ -620,7 +652,8 @@
 
           try {
 
-            $produtoDAO->deletaProduto($_POST['excluirProdutoParceiro'], $_SESSION['cliente']['email']);
+            $diretorioUser = './imagens-parceiro/'. $_SESSION['cliente']['email'];
+            $produtoDAO->deletaProduto($_POST['excluirProdutoParceiro'], $_SESSION['cliente']['email'], $diretorioUser);
 
           } catch (\Throwable $th) {
 
@@ -633,11 +666,11 @@
                     confirmButtonText: 'Continuar',
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        // Redireciona para a página de carrinho após adicionar o produto
-                        window.location.href = 'produtosCliente.php';
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
                     } else {
-                        // Continua na página atual
-                        window.location.href = 'produtosCliente.php';
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
                     }
                     });
                     </script>";
@@ -656,11 +689,11 @@
                     confirmButtonText: 'Continuar',
                     }).then((result) => {
                     if (result.isConfirmed) {
-                        // Redireciona para a página de carrinho após adicionar o produto
-                        window.location.href = 'produtosCliente.php';
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
                     } else {
-                        // Continua na página atual
-                        window.location.href = 'produtosCliente.php';
+                      // Recarrega a página atual
+                      window.location.href = 'produtosCliente.php';
                     }
                     });
                     </script>";
@@ -668,6 +701,206 @@
           }
 
         }
+
+        $falha = false;
+
+      ?>
+      <?php
+
+        if ((isset($_POST['atualizaProdutoParceiro'])) && (isset($_FILES['imagemAtualizacao']))) {
+
+          $type = substr($_FILES['imagemAtualizacao']['type'], 0, 5);
+
+          if (!($type === 'image')) {
+
+            echo "<script>
+            Swal.fire({
+            title: 'Erro ao atualizar a imagem do produto!',
+            text: 'ERRO: Só é permitido o envio de imagens!',
+            icon: 'error',
+            showCancelButton: false,
+            confirmButtonText: 'Continuar',
+            }).then((result) => {
+            if (result.isConfirmed) {
+              // Recarrega a página atual
+              window.location.href = 'produtosCliente.php';
+            } else {
+              // Recarrega a página atual
+              window.location.href = 'produtosCliente.php';
+            }
+            });
+            </script>";
+    
+            $fail = true;
+
+          }
+
+          if (!$fail) {
+
+            $nomeProduto = $_POST['nomeProdutoAtualizacao'];
+            $descricaoProduto = $_POST['descricaoProdutoAtualizacao'];
+            $tamanhos = $_POST['tamanhosAtt'][0] . $_POST['tamanhosAtt'][1] . $_POST['tamanhosAtt'][2];
+            $preco = $_POST['precoProdutoAtualiza'];
+            $imagem = $_FILES['imagemAtualizacao'];
+
+            $diretorio = './imagens-parceiro/'. $_SESSION['cliente']['email'];
+
+            if (!is_dir($diretorio)) {
+
+              echo "<script>
+              Swal.fire({
+              title: 'Erro interno do servidor!',
+              text: 'ERRO: 500',
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonText: 'Continuar',
+              }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              } else {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              }
+              });
+              </script>";
+      
+              $fail = true;
+
+            }
+
+            $concertado = str_replace(' ', '', date('Y-m-d H:i:i') . date('U') . $nomeProduto . $imagem['name']);
+            $concertado = str_replace('-', '', $concertado);
+            $concertado = str_replace(':', '', $concertado);
+            $concertado = str_replace('_', '', $concertado);
+
+            $diretorio = $diretorio . '/' . $concertado;
+
+            $resultado = false;
+
+            if ((file_exists($diretorio)) && (!$fail)) {
+
+              echo "<script>
+              Swal.fire({
+              title: 'Erro no envio da imagem!',
+              text: 'ERRO: Arquivo de imagem já existe!',
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonText: 'Continuar',
+              }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              } else {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              }
+              });
+              </script>";
+
+              $fail = true;
+
+            } else {
+
+              $resultado = rename($imagem['tmp_name'], $diretorio);
+
+            }
+
+            if ((!$resultado) && (!$fail)) {
+
+              echo "<script>
+              Swal.fire({
+              title: 'Erro interno do servidor!',
+              text: 'ERRO: 500',
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonText: 'Continuar',
+              }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              } else {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              }
+              });
+              </script>";
+
+              $fail = true;
+
+            }
+
+          }
+
+          if (!$fail) {
+
+            try {
+                  
+              $produto = new Produto($nomeProduto, $preco, $descricaoProduto, $concertado, $tamanhos, $cliente);
+
+            } catch (\Throwable $th) {
+
+              echo $th->getMessage();
+
+            }
+
+            try {
+              
+              $produtoDAO->atualizaProduto($_POST['atualizaProdutoParceiro'], $_SESSION['cliente']['email'], $produto, './imagens-parceiro/'. $_SESSION['cliente']['email']);
+              
+            } catch (\Throwable $th) {
+              
+              echo $th->getMessage();
+              $fail = true;
+
+            }
+
+            if (($resultado) && (!$fail)) {
+                
+              echo "<script>
+              Swal.fire({
+              title: 'Produto atualizado!',
+              text: 'Você já pode ver seu produto atualizado em MEUS PRODUTOS!',
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonText: 'Continuar',
+              }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              } else {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              }
+              });
+              </script>";
+            
+            } else {
+
+              echo "<script>
+              Swal.fire({
+              title: 'Erro ao atualizar produto! :(',
+              text: 'Tente novamente!',
+              icon: 'error',
+              showCancelButton: false,
+              confirmButtonText: 'Continuar',
+              }).then((result) => {
+              if (result.isConfirmed) {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              } else {
+                // Recarrega a página atual
+                window.location.href = 'produtosCliente.php';
+              }
+              });
+              </script>";
+
+            }
+
+          }
+
+        }
+
       ?>
     </div>
     <footer class="green-background" style="bottom: 0; width: 100%; padding: 10px;">      <div class="page-inner-content footer-content">
