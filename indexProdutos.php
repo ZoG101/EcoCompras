@@ -34,7 +34,17 @@
     try {
 
         $endereco = new Endereco('N/D', 'N/D', 'N/D', 'N/D', 'N/D', 'N/D', 'N/D',);
-        $cliente = new Cliente($_SESSION['cliente']['nome'], $_SESSION['cliente']['cpf'], $_SESSION['cliente']['email'], $_SESSION['cliente']['telefone'], 'N/D', $endereco);
+
+        if (isset($_SESSION['cliente'])){
+
+            $cliente = new Cliente($_SESSION['cliente']['nome'], $_SESSION['cliente']['cpf'], $_SESSION['cliente']['email'], $_SESSION['cliente']['telefone'], 'N/D', $endereco);
+
+        } else {
+
+            $cliente = new Cliente('N/D', 'N/D', 'N/D', 'N/D', 'N/D', $endereco);
+
+        }
+        
         $produtoDAO = new produtoDAO();
 
     } catch (\Throwable $th) {

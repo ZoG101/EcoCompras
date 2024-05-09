@@ -423,6 +423,12 @@
               $preco = $_POST['precoProduto'];
               $imagem = $_FILES['imagem'];
 
+              $diretorio = './imagens-parceiro';
+
+              if(!is_dir($diretorio)){
+                mkdir($diretorio);
+              }
+
               $diretorio = './imagens-parceiro/'. $_SESSION['cliente']['email'];
 
               if(!is_dir($diretorio)){
