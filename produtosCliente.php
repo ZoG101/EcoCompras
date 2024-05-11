@@ -913,7 +913,7 @@
           <div class="logo-footer">
               <h1 class="logo">Eco<span>Compras</span></h1>
               <p>100% de produtos sustentáveis!</p>
-              <p>copyright 2023 ©</p>
+              <p>copyright 2024 ©</p>
           </div>
       </div>
   </footer>
