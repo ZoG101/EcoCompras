@@ -7,7 +7,7 @@
 
 O aplicativo "EcoCompras" tem como objetivo ajudar os consumidores a fazerem escolhas mais sustentáveis ao fazer compras. Ele fornece informações detalhadas sobre o impacto ambiental de produtos, permitindo que os usuários façam escolhas conscientes em relação aos produtos que compram. O aplicativo também se esforça para educar os usuários sobre questões ambientais e promover práticas de compra ecologicamente corretas.
 
-## Layout Mobile 📱
+## Layout Mobile (Conceito) 📱
 ![layout_mobile](./imagens_md/layout_mobile.png)
 
 ## Layout Remodelagem Desktop 
@@ -18,7 +18,7 @@ O aplicativo "EcoCompras" tem como objetivo ajudar os consumidores a fazerem esc
 
 ## Modelagem do Bando de Dados
 
-![image](https://github.com/ZoG101/EcoCompras/assets/93394241/17d01186-3cc3-4e12-a97d-4c3b025c1e8e)
+![MER](https://github.com/ZoG101/EcoCompras/assets/93394241/f6689bc1-61c1-482e-9a74-c2e85aed1c5f)
 
 ## Pré-requisitos para rodar o projeto 
 
@@ -55,11 +55,16 @@ O código-fonte da aplicação está disponível no repositório
 <img src="./imagens_md/cadastro.jpeg">
 
 * <h3> Acesse o carrinho para finalizar a compra;
-<img src="./imagens_md/carrinho_produtos.jpeg">
+![carrinho_produtos_corrigido](https://github.com/ZoG101/EcoCompras/assets/93394241/e9d203eb-f155-4d21-bb52-62ea536754cb)
 
 * <h3> Acesse a página do cliente para acompanhar o seu pedido;
-<img src="./imagens_md/pagina_cliente.jpeg">
+![pagina_cliente_com_produtos_corrigido](https://github.com/ZoG101/EcoCompras/assets/93394241/3c541b2a-4ecb-4150-9873-644416998ff2)
 
+* <h3> Acesse a página "SEJA PARCEIRO" e escolha um nome disponível para a sua lojinha;
+![Página_tornarParceiro_corrigido](https://github.com/ZoG101/EcoCompras/assets/93394241/f2803b75-e2c1-4b66-a5c3-f4f02316e7f6)
+
+* <h3> Acesse a página "MINHA LOJA" e comece a gerenciar os seus produtos;
+![Página_da_LojaParceira (com_produtos)_corrigido](https://github.com/ZoG101/EcoCompras/assets/93394241/8b05eec7-0f1a-4432-a09b-52f4e9a0ed72)
 
 
 ## Implementação
